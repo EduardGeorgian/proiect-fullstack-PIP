@@ -19,7 +19,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//valoarea pentru ID va fi generata automat de baza de date
     private Long id;
+
     private String username;
+
     private String email;
+
     private String password;
+
 }
