@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -27,4 +29,8 @@ public class Account {
 
     @ManyToOne
     private User user; //Relatie many to one intre account si utilizator
+
+    @OneToMany
+    private List<Transaction> transactions; //In baza de date exista o cheie straina catre un account
 }
+
