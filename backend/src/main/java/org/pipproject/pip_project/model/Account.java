@@ -32,5 +32,10 @@ public class Account {
 
     @OneToMany
     private List<Transaction> transactions; //In baza de date exista o cheie straina catre un account
+
+    public Account( Currency currency, User user) {
+        this.currency = currency;
+        this.user = user;
+    }
 }
 
