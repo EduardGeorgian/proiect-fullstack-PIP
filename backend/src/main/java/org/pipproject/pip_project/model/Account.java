@@ -30,8 +30,11 @@ public class Account {
     @ManyToOne
     private User user; //Relatie many to one intre account si utilizator
 
-    @OneToMany
+    @OneToMany(mappedBy = "sourceAccount")
     private List<Transaction> transactions; //In baza de date exista o cheie straina catre un account
+
+    @OneToMany(mappedBy = "destinationAccount")
+    private List<Transaction> receivedTransactions;
 
     public Account( Currency currency, User user) {
         this.currency = currency;
