@@ -32,9 +32,18 @@ public class AccountController {
         }
     }
 
-    @GetMapping("/user")
+    @GetMapping("")
     public ResponseEntity<?> getAllAccounts(@RequestParam String email){
-        List<Account> accounts = accountService.getAccountsByUser(email);
-        return ResponseEntity.status(HttpStatus.OK).body(accounts);
+        try {
+            List<Account> accounts = accountService.getAccountsByUser(email);
+            if (accounts.isEmpty())
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No accounts found");
+
+            return ResponseEntity.status(HttpStatus.OK).body(accounts);
+        }
+        catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
+
 }

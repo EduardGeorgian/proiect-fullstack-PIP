@@ -1,5 +1,6 @@
 package org.pipproject.pip_project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,28 +15,29 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Account {
-    /*
-        Generam id ul automat, si nu folosim acelasi id de la utilizator pentru a putea avea mai multe
-        conturi asociate unui singur utilizator
-    */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private Double balance;
+    @Column(nullable = false)
+    private Double balance = 0.0;
 
     @Enumerated(EnumType.STRING)
-    private Currency currency; //Folosim enum-ul currency
+    private Currency currency;
 
     @ManyToOne
-    private User user; //Relatie many to one intre account si utilizator
+    private User user;
 
-    @OneToMany
-    private List<Transaction> transactions; //In baza de date exista o cheie straina catre un account
+    @OneToMany(mappedBy = "sourceAccount")
+    @JsonIgnore  // Evita incarcarea tranzactiilor in raspuns
+    private List<Transaction> transactions;
 
-    public Account( Currency currency, User user) {
+
+    public Account(Currency currency, User user) {
         this.currency = currency;
         this.user = user;
     }
 }
+
 
