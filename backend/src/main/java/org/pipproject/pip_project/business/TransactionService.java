@@ -26,6 +26,7 @@ public class TransactionService {
 
     @Transactional
     public Transaction addTransaction(TransactionType type, Date date, double amount, Account sourceAccount, Account destinationAccount, TransactionStatus status) {
+        // TODO: this is a good place also for validators
         if(amount<=0)
             throw new IllegalArgumentException("Amount must be greater than 0");
 

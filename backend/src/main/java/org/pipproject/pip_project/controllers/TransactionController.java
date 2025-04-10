@@ -19,9 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/api/transactions")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class TransactionController {
     private final TransactionService transactionService;
+
+    // TODO: Controller should not interact directly with the repository. If any interactions needed have an service for accounts and make that make use of the repository
+    // Controller -> Service -> Repository
     private final AccountRepository accountRepository;
 
     @Autowired
@@ -33,14 +36,17 @@ public class TransactionController {
     @PostMapping("")
     public ResponseEntity<?> addTransaction(@RequestBody TransactionDTO transactionDTO) {
         try {
+            // TODO: can this be null?
             if (transactionDTO.getType() == null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Transaction type is required");
             }
 
+            // TODO: this a good place to use validators.
             if (transactionDTO.getAmount() <= 0) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Amount must be greater than zero");
             }
 
+            // TODO: find methods in repository already return optionals. you can use Optional.isPresent method to check if account was found
             Account sourceAccount = transactionDTO.getSourceAccount() != null ?
                     accountRepository.findById(transactionDTO.getSourceAccount().getId()).orElse(null) : null;
             Account destinationAccount = transactionDTO.getDestinationAccount() != null ?

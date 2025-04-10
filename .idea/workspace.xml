@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f01bce7e-f171-4b66-ae54-0d22899699fc" name="Changes" comment="Connected database">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/TransactionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/TransactionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/TransactionDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/repositories/TransactionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="f01bce7e-f171-4b66-ae54-0d22899699fc" name="Changes" comment="Implemented TransactionController,Service,Dto,Repository">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/TransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/TransactionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/AccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/TransactionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/Currency.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/Currency.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +143,10 @@
       <workItem from="1743027967471" duration="2988000" />
       <workItem from="1743360184445" duration="944000" />
       <workItem from="1743367188864" duration="2331000" />
-      <workItem from="1743450758146" duration="4583000" />
+      <workItem from="1743450758146" duration="4781000" />
+      <workItem from="1743871396653" duration="3088000" />
+      <workItem from="1744092646551" duration="609000" />
+      <workItem from="1744222448706" duration="2292000" />
     </task>
     <task id="LOCAL-00001" summary="Connected database">
       <option name="closed" value="true" />
@@ -156,7 +156,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742937054630</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Implemented TransactionController,Service,Dto,Repository">
+      <option name="closed" value="true" />
+      <created>1743455526906</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1743455526906</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,7 +172,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Connected database" />
-    <option name="LAST_COMMIT_MESSAGE" value="Connected database" />
+    <MESSAGE value="Implemented TransactionController,Service,Dto,Repository" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented TransactionController,Service,Dto,Repository" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
