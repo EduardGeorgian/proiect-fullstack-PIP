@@ -39,7 +39,7 @@ public class UserService {
         return userOptional.get();
     }
 
-    private User findUserByEmail(String email) throws Exception {
+    public User findUserByEmail(String email) throws Exception {
         Optional<User> userOptional = userRepository.findByEmail(email);
 
         if(userOptional.isEmpty())
