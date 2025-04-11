@@ -1,5 +1,6 @@
 package org.pipproject.pip_project.business;
 
+import org.pipproject.pip_project.dto.AccountSendTransactionDTO;
 import org.pipproject.pip_project.model.Account;
 import org.pipproject.pip_project.model.Currency;
 import org.pipproject.pip_project.model.User;
@@ -31,6 +32,15 @@ public class AccountService {
     public List<Account> getAccountsByUser(String email){
         Optional<User> user = Optional.ofNullable(userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found")));
         return accountRepository.findByUser(user);
+    }
+
+    public List<AccountSendTransactionDTO> getAccountSendTransactionsByUser(String email){
+        Optional<User> user = Optional.ofNullable(userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found")));
+        return accountRepository.findAccountSendTransactionDTOByUser(user);
+    }
+
+    public Account getAccountById(Long id){
+        return accountRepository.findById(id).orElseThrow(() -> new RuntimeException("Account not found"));
     }
 
 }
