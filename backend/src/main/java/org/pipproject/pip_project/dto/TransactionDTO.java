@@ -18,6 +18,6 @@ public class TransactionDTO {
     private TransactionType type;
     private Date date;
     private double amount;
-    private Account sourceAccount;
-    private Account destinationAccount;
+    private Long sourceAccountId;
+    private Long destinationAccountId;
 }

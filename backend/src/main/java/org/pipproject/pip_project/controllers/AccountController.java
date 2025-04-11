@@ -34,7 +34,9 @@ public class AccountController {
             Account responseAccount = accountService.createAccount(account.getCurrency(), account.getUser());
             return ResponseEntity.status(HttpStatus.CREATED).body(responseAccount);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            Map<String,String> response = new HashMap<>();
+            response.put("error",e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
 
@@ -42,15 +44,17 @@ public class AccountController {
     public ResponseEntity<?> getAllAccounts(@RequestParam String email) {
         try {
             List<Account> accounts = accountService.getAccountsByUser(email);
-            // TODO: if no account found just return an empty list
+            // DoneTODO: if no account found just return an empty list
             // 404 is http code for when a resource is not found on the server. in this case it exists but indeed is an empty list
             // this can be treated by the frontend side by checking the size
             if (accounts.isEmpty())
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No accounts found");
+                return ResponseEntity.status(HttpStatus.OK).body(accounts);
 
             return ResponseEntity.status(HttpStatus.OK).body(accounts);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            Map<String,String> response = new HashMap<>();
+            response.put("error",e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
 

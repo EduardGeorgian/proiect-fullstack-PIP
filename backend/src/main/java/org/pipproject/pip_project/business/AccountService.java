@@ -39,4 +39,8 @@ public class AccountService {
         return accountRepository.findAccountSendTransactionDTOByUser(user);
     }
 
+    public Account getAccountById(Long id){
+        return accountRepository.findById(id).orElseThrow(() -> new RuntimeException("Account not found"));
+    }
+
 }

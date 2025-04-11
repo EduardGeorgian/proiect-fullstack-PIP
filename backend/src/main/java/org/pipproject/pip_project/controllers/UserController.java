@@ -37,7 +37,9 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
         }
         catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            Map<String,String> response = new HashMap<>();
+            response.put("error",e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
 
@@ -78,7 +80,9 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("invalid username or password");
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("invalid username or password");
+            Map<String,String> response = new HashMap<>();
+            response.put("error",e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
     }
 

@@ -8,6 +8,7 @@ import org.pipproject.pip_project.model.TransactionStatus;
 import org.pipproject.pip_project.model.TransactionType;
 import org.pipproject.pip_project.repositories.AccountRepository;
 import org.pipproject.pip_project.repositories.TransactionRepository;
+import org.pipproject.pip_project.validators.TransactionValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -26,24 +27,8 @@ public class TransactionService {
 
     @Transactional
     public Transaction addTransaction(TransactionType type, Date date, double amount, Account sourceAccount, Account destinationAccount, TransactionStatus status) {
-        // TODO: this is a good place also for validators
-        if(amount<=0)
-            throw new IllegalArgumentException("Amount must be greater than 0");
 
-        if(type == TransactionType.TRANSFER || type == TransactionType.WITHDRAWAL){
-            if(sourceAccount==null){
-                throw new IllegalArgumentException("Source account cannot be null");
-            }
-            if(sourceAccount.getBalance()<amount){
-                throw new IllegalArgumentException("Insufficient balance in the source account");
-            }
-        }
-
-        if(type == TransactionType.TRANSFER || type == TransactionType.DEPOSIT){
-            if (destinationAccount == null) {
-                throw new IllegalArgumentException("Destination account is required for this transaction type.");
-            }
-        }
+        TransactionValidator.validate(type,amount,sourceAccount,destinationAccount);
 
         Transaction transaction = new Transaction(type, date, amount, sourceAccount, destinationAccount, status);
 
