@@ -20,6 +20,8 @@ public class Transaction {
 
     private double amount;
 
+    private String initiatorEmail;
+
     @Enumerated(EnumType.STRING)
     private TransactionType type;
 
@@ -37,12 +39,13 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     private TransactionStatus status;
 
-    public Transaction(TransactionType type, Date date, double amount,Account sourceAccount, Account destinationAccount, TransactionStatus status) {
+    public Transaction(String initiatorEmail,TransactionType type, Date date, double amount,Account sourceAccount, Account destinationAccount, TransactionStatus status) {
         this.type = type;
         this.date = date;
         this.amount = amount;
         this.sourceAccount = sourceAccount;
         this.destinationAccount = destinationAccount;
         this.status = status;
+        this.initiatorEmail = initiatorEmail;
     }
 }

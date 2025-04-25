@@ -15,8 +15,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TransactionDTO {
+    private String initiatorEmail;
     private TransactionType type;
-    private Date date;
     private double amount;
     private Long sourceAccountId;
     private Long destinationAccountId;

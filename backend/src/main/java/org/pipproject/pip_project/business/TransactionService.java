@@ -10,9 +10,9 @@ import org.pipproject.pip_project.repositories.AccountRepository;
 import org.pipproject.pip_project.repositories.TransactionRepository;
 import org.pipproject.pip_project.validators.TransactionValidator;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class TransactionService {
@@ -26,24 +26,32 @@ public class TransactionService {
     }
 
     @Transactional
-    public Transaction addTransaction(TransactionType type, Date date, double amount, Account sourceAccount, Account destinationAccount, TransactionStatus status) {
+    public Transaction addTransaction(String initiatiorEmail,TransactionType type, double amount, Account sourceAccount, Account destinationAccount, TransactionStatus status) {
 
-        TransactionValidator.validate(type,amount,sourceAccount,destinationAccount);
+        TransactionValidator.validate(type, amount, sourceAccount, destinationAccount);
 
-        Transaction transaction = new Transaction(type, date, amount, sourceAccount, destinationAccount, status);
+        Transaction transaction = new Transaction(initiatiorEmail,type, new Date(), amount, sourceAccount, destinationAccount, status);
 
-        if (type == TransactionType.TRANSFER || type == TransactionType.WITHDRAWAL) {
+        if (type == TransactionType.TRANSFER) {
+            sourceAccount.setBalance(sourceAccount.getBalance() - amount);
+            destinationAccount.setBalance(destinationAccount.getBalance() + amount);
+            accountRepository.save(sourceAccount);
+            accountRepository.save(destinationAccount);
+        } else if (type == TransactionType.WITHDRAWAL) {
             sourceAccount.setBalance(sourceAccount.getBalance() - amount);
             accountRepository.save(sourceAccount);
-        }
-
-        if (type == TransactionType.TRANSFER || type == TransactionType.DEPOSIT) {
-            destinationAccount.setBalance(destinationAccount.getBalance() + amount);
-            accountRepository.save(destinationAccount);
+        } else if (type == TransactionType.DEPOSIT) {
+            sourceAccount.setBalance(sourceAccount.getBalance() + amount);
+            accountRepository.save(sourceAccount);
         }
 
         return transactionRepository.save(transaction);
 
+    }
+
+
+    public List<Transaction> getAllTransactions(String initiatorEmail) {
+        return transactionRepository.findByInitiatorEmail(initiatorEmail);
     }
 
 }
