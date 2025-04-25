@@ -19,7 +19,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins="*")//pentru accesare din frontend, de pe alt domeniu decat local
+@CrossOrigin(origins = "*")//pentru accesare din frontend, de pe alt domeniu decat local
 public class UserController {
     private final UserService userService;
     private final AccountService accountService;
@@ -35,10 +35,9 @@ public class UserController {
         try {
             User responseUser = userService.addUser(user.getUsername(), user.getEmail(), user.getPassword());
             return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
-        }
-        catch (Exception e) {
-            Map<String,String> response = new HashMap<>();
-            response.put("error",e.getMessage());
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
@@ -51,39 +50,29 @@ public class UserController {
             UserWithAccountsDTO response = new UserWithAccountsDTO(requestedUser, accountList);
 
             return ResponseEntity.status(HttpStatus.OK).body(response);
-        }
-        catch (Exception e) {
-            Map<String,String> response = new HashMap<>();
-            response.put("error",e.getMessage());
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
 
-//    @GetMapping()
-//    public ResponseEntity<?> getUser2(@PathParam("userId") Long userId) {
-//        try {
-//            User requestedUser = userService.findUserById(userId);
-//            return ResponseEntity.ok(requestedUser);
-//        }
-//        catch (Exception e) {
-//            Map<String,String> response = new HashMap<>();
-//            response.put("error",e.getMessage());
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-//        }
-//    }
-
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
-        try{
-            if(userService.validateUserCredentials(loginDTO.getEmail(),loginDTO.getPassword()))
-                return ResponseEntity.ok("success");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("invalid username or password");
-
+        try {
+            if (userService.validateUserCredentials(loginDTO.getEmail(), loginDTO.getPassword())) {
+                User requestedUser = userService.findUserByEmail(loginDTO.getEmail());
+                return ResponseEntity.status(HttpStatus.OK).body(requestedUser);
+            }
+            else{
+                Map<String, String> response = new HashMap<>();
+                response.put("error","Invalid password");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            }
         } catch (Exception e) {
-            Map<String,String> response = new HashMap<>();
-            response.put("error",e.getMessage());
+            Map<String, String> response = new HashMap<>();
+            response.put("error", e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
     }
-
 }
