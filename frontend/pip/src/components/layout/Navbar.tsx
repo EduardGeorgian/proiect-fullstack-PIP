@@ -1,8 +1,14 @@
-import { Link, useLocation, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const { pathname } = useLocation();
-  const { id } = useParams<{ id: string }>();
+  const [id, setId] = useState<null | null>(null);
+
+  useEffect(() => {
+    const id = JSON.parse(localStorage.getItem("user") || "{}").id;
+    setId(id);
+  }, []);
 
   const linkStyle = (path: string) =>
     `text-sm font-medium ${
@@ -11,10 +17,10 @@ export default function Navbar() {
 
   return (
     <nav className="flex gap-6 p-4 border-b">
-      <Link to={`/dashboard/${id}`} className={linkStyle("/")}>
+      <Link to={`/dashboard/${id}`} className={linkStyle("/dashboard")}>
         Dashboard
       </Link>
-      <Link to="/transactions" className={linkStyle("/transactions")}>
+      <Link to={`/transactions/${id}`} className={linkStyle(`/transactions`)}>
         Transactions
       </Link>
       <Link to="/friends" className={linkStyle("/friends")}>

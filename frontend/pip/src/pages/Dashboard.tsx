@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getUserDashboard } from "@/services/userService";
 import { User, Account } from "@/lib/types";
@@ -6,12 +5,14 @@ import UserProfileCard from "@/components/user/UserProfileCard";
 import AccountList from "@/components/account/AccountList";
 
 const Dashboard = () => {
-  const { id } = useParams<{ id: string }>();
+  const [id, setId] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const id = JSON.parse(localStorage.getItem("user") || "{}").id;
+    setId(id);
     const fetchDashboard = async () => {
       try {
         if (!id) return;

@@ -10,3 +10,13 @@ export interface Account {
   currency: string;
   user: User;
 }
+
+export interface Transaction {
+  id: number;
+  amount: number;
+  type: string;
+  date: string;
+  sourceAccount: Account;
+  destinationAccount: Account;
+  status: string;
+}
