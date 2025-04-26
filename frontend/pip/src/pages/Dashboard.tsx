@@ -38,7 +38,7 @@ const Dashboard = () => {
         username={user.username}
         email={user.email}
       ></UserProfileCard>
-      <h2 className="text-2xl font-bold mt-4">Conturi</h2>
+      <h2 className="text-2xl font-bold mt-4">Accounts</h2>
       <AccountList accounts={accounts} />
     </>
   );
