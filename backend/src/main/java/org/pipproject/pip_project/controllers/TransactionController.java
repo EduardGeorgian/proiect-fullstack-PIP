@@ -14,12 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -35,10 +33,9 @@ public class TransactionController {
         this.accountService = accountService;
     }
 
-    @PostMapping("")
+    @PostMapping("/add")
     public ResponseEntity<?> addTransaction(@RequestBody TransactionDTO transactionDTO) {
         try {
-            TransactionDTOValidator.validate(transactionDTO);
 
             Account sourceAccount = transactionDTO.getSourceAccountId() != null ?
                     accountService.getAccountById(transactionDTO.getSourceAccountId()) : null;
@@ -59,8 +56,8 @@ public class TransactionController {
             }
 
             Transaction responseTransaction = transactionService.addTransaction(
+                    transactionDTO.getInitiatorEmail(),
                     transactionDTO.getType(),
-                    transactionDTO.getDate(),
                     transactionDTO.getAmount(),
                     sourceAccount,
                     destinationAccount,
@@ -70,6 +67,20 @@ public class TransactionController {
             return ResponseEntity.status(HttpStatus.CREATED).body(responseTransaction);
 
         } catch (Exception e) {
+            Map<String,String> response = new HashMap<>();
+            response.put("error",e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+    @GetMapping("")
+    public ResponseEntity<?> getAllTransactions(@RequestParam String initiatorEmail) {
+        try{
+            List<Transaction> transactions = transactionService.getAllTransactions(initiatorEmail);
+            if (transactions.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No transactions found.");
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(transactions);
+        }catch (Exception e){
             Map<String,String> response = new HashMap<>();
             response.put("error",e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
