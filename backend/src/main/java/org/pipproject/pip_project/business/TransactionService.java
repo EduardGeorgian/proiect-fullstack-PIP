@@ -26,11 +26,11 @@ public class TransactionService {
     }
 
     @Transactional
-    public Transaction addTransaction(String initiatiorEmail,TransactionType type, double amount, Account sourceAccount, Account destinationAccount, TransactionStatus status) {
+    public Transaction addTransaction(String initiatorEmail,TransactionType type, double amount, Account sourceAccount, Account destinationAccount, TransactionStatus status) {
 
         TransactionValidator.validate(type, amount, sourceAccount, destinationAccount);
 
-        Transaction transaction = new Transaction(initiatiorEmail,type, new Date(), amount, sourceAccount, destinationAccount, status);
+        Transaction transaction = new Transaction(initiatorEmail,type, new Date(), amount, sourceAccount, destinationAccount, status);
 
         if (type == TransactionType.TRANSFER) {
             sourceAccount.setBalance(sourceAccount.getBalance() - amount);
@@ -51,7 +51,7 @@ public class TransactionService {
 
 
     public List<Transaction> getAllTransactions(String initiatorEmail) {
-        return transactionRepository.findByInitiatorEmail(initiatorEmail);
+        return transactionRepository.findByInitiatorEmailOrderByDateDesc(initiatorEmail);
     }
 
 }
