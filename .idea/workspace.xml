@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f01bce7e-f171-4b66-ae54-0d22899699fc" name="Changes" comment="LOTS AND LOTS">
+    <list default="true" id="f01bce7e-f171-4b66-ae54-0d22899699fc" name="Changes" comment="get transactions ordered by date desc">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/FriendsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/FriendsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/FriendRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/FriendRequestStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/Friends.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/repositories/FriendsRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/TransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/TransactionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/repositories/TransactionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/repositories/TransactionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +25,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -153,7 +160,8 @@
       <workItem from="1745402876602" duration="1501000" />
       <workItem from="1745571595474" duration="9601000" />
       <workItem from="1745610350200" duration="1702000" />
-      <workItem from="1745662144201" duration="1396000" />
+      <workItem from="1745662144201" duration="2049000" />
+      <workItem from="1746187121648" duration="6413000" />
     </task>
     <task id="LOCAL-00001" summary="Connected database">
       <option name="closed" value="true" />
@@ -171,7 +179,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745613608272</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="get transactions ordered by date desc">
+      <option name="closed" value="true" />
+      <created>1745666757747</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1745666757747</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,7 +196,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Connected database" />
     <MESSAGE value="LOTS AND LOTS" />
-    <option name="LAST_COMMIT_MESSAGE" value="LOTS AND LOTS" />
+    <MESSAGE value="get transactions ordered by date desc" />
+    <option name="LAST_COMMIT_MESSAGE" value="get transactions ordered by date desc" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
