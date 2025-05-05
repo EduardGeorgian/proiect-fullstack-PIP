@@ -1,28 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="IU-251.23774.435">
     <data-source name="proiect_pip@localhost" uuid="b8b5ed65-1346-46f1-b731-e1e7295daeff">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
-      <schema-mapping />
-    </data-source>
-    <data-source name="AivenDB" uuid="d79461f5-6904-48aa-bea4-70b53cde5799">
-      <database-info product="MySQL" version="8.0.35" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-j-8.2.0 (Revision: 06a1f724497fd81c6a659131fda822c9e5085b6c)" dbms="MYSQL" exact-version="8.0.35" exact-driver-version="8.2">
         <extra-name-characters>#@</extra-name-characters>
-        <identifier-quote-string>&quot;</identifier-quote-string>
-        <jdbc-catalog-is-schema>true</jdbc-catalog-is-schema>
       </database-info>
-      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
-      <user-name>avnadmin</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="schema">
-            <name qname="@" />
-            <name qname="defaultdb" />
-          </node>
         </introspection-scope>
       </schema-mapping>
-      <load-sources>user_and_system_sources</load-sources>
     </data-source>
   </component>
 </project>
