@@ -15,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<LoginForm />} />={" "}
           <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<Dashboard />} />={" "}
             <Route path="/dashboard/:id" element={<Dashboard />} />={" "}
             <Route path="/transactions/:id" element={<TransactionsPage />} />={" "}
             <Route path="/friends/:id" element={<FriendsPage />} />={" "}
