@@ -1,0 +1,194 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"f01bce7e-f171-4b66-ae54-0d22899699fc\" name=\"Changes\" comment=\"Connected database\">\n      <change afterPath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/validators/TransactionDTOValidator.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/validators/TransactionValidator.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/AccountService.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/AccountService.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/TransactionService.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/TransactionService.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/AccountController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/AccountController.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/TransactionController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/TransactionController.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/UserController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/UserController.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/TransactionDTO.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/TransactionDTO.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Interface\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitHubPullRequestSearchHistory\">{\n  &quot;lastFilter&quot;: {\n    &quot;state&quot;: &quot;OPEN&quot;,\n    &quot;assignee&quot;: &quot;EduardGeorgian&quot;\n  }\n}</component>\n  <component name=\"GithubProjectSettings\">\n    <option name=\"branchProtectionPatterns\">\n      <list>\n        <option value=\"main\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"GithubPullRequestsUISettings\">{\n  &quot;selectedUrlAndAccountId&quot;: {\n    &quot;url&quot;: &quot;https://github.com/EduardGeorgian/proiect-fullstack-PIP.git&quot;,\n    &quot;accountId&quot;: &quot;29f0f39f-d8bb-4756-ad8d-dc098574bc67&quot;\n  }\n}</component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 6\n}</component>\n  <component name=\"ProjectId\" id=\"2uodnmfqMSfE7Z7YatEeepW3MkT\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"ASKED_SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\n    \"Notification.DisplayName-DoNotAsk-Database detector\": \"Database detector\",\n    \"Notification.DoNotAsk-Database detector\": \"true\",\n    \"RequestMappingsPanelOrder0\": \"0\",\n    \"RequestMappingsPanelOrder1\": \"1\",\n    \"RequestMappingsPanelWidth0\": \"75\",\n    \"RequestMappingsPanelWidth1\": \"75\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\n    \"Spring Boot.PipProjectApplication.executor\": \"Run\",\n    \"git-widget-placeholder\": \"dev\",\n    \"kotlin-language-version-configured\": \"true\",\n    \"last_opened_file_path\": \"D:/PIP-2024-2025/proiect-fullstack-PIP\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"project.structure.last.edited\": \"Project\",\n    \"project.structure.proportion\": \"0.15\",\n    \"project.structure.side.proportion\": \"0.2\",\n    \"settings.editor.selected.configurable\": \"preferences.pluginManager\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  },\n  \"keyToStringList\": {\n    \"DatabaseDriversLRU\": [\n      \"mysql\"\n    ]\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"D:\\PIP-2024-2025\\proiect-fullstack-PIP\\backend\" />\n      <recent name=\"D:\\PIP-2024-2025\\proiect-fullstack-PIP/backend\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\n      <module name=\"proiect-fullstack-PIP\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\n      <module name=\"proiect-fullstack-PIP\" />\n      <option name=\"filePath\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"PipProjectApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\n      <option name=\"FRAME_DEACTIVATION_UPDATE_POLICY\" value=\"UpdateClassesAndResources\" />\n      <module name=\"PIP_project\" />\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"org.pipproject.pip_project.PipProjectApplication\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103\" />\n        <option value=\"bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"f01bce7e-f171-4b66-ae54-0d22899699fc\" name=\"Changes\" comment=\"\" />\n      <created>1742919029177</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1742919029177</updated>\n      <workItem from=\"1742919030287\" duration=\"2141000\" />\n      <workItem from=\"1742921219278\" duration=\"400000\" />\n      <workItem from=\"1742921640409\" duration=\"195000\" />\n      <workItem from=\"1742934864692\" duration=\"876000\" />\n      <workItem from=\"1742935755584\" duration=\"1191000\" />\n      <workItem from=\"1743018364143\" duration=\"2799000\" />\n      <workItem from=\"1743023329694\" duration=\"4217000\" />\n      <workItem from=\"1743027567730\" duration=\"389000\" />\n      <workItem from=\"1743027967471\" duration=\"2988000\" />\n      <workItem from=\"1743360184445\" duration=\"944000\" />\n      <workItem from=\"1743367188864\" duration=\"2331000\" />\n      <workItem from=\"1743450758146\" duration=\"4583000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"Connected database\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1742937054630</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1742937054630</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"2\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"Connected database\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Connected database\" />\n  </component>\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\n    <expand />\n    <select />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 0cd176a01b0ce56188621e839378d14d35ccf641)
++++ b/.idea/workspace.xml	(date 1744625797259)
+@@ -4,17 +4,9 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="f01bce7e-f171-4b66-ae54-0d22899699fc" name="Changes" comment="Connected database">
+-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/validators/TransactionDTOValidator.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/validators/TransactionValidator.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++    <list default="true" id="f01bce7e-f171-4b66-ae54-0d22899699fc" name="Changes" comment="Resolved TODOs, tested endpoints for Transaction">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/AccountService.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/TransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/TransactionService.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/AccountController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/TransactionController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/UserController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/TransactionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/TransactionDTO.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/validators/TransactionDTOValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/validators/TransactionDTOValidator.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -43,6 +35,9 @@
+     &quot;assignee&quot;: &quot;EduardGeorgian&quot;
+   }
+ }</component>
++  <component name="GithubDefaultAccount">
++    <option name="defaultAccountId" value="3eb98b19-5a5e-4664-9ac0-1b93c0256fa0" />
++  </component>
+   <component name="GithubProjectSettings">
+     <option name="branchProtectionPatterns">
+       <list>
+@@ -53,7 +48,7 @@
+   <component name="GithubPullRequestsUISettings">{
+   &quot;selectedUrlAndAccountId&quot;: {
+     &quot;url&quot;: &quot;https://github.com/EduardGeorgian/proiect-fullstack-PIP.git&quot;,
+-    &quot;accountId&quot;: &quot;29f0f39f-d8bb-4756-ad8d-dc098574bc67&quot;
++    &quot;accountId&quot;: &quot;3eb98b19-5a5e-4664-9ac0-1b93c0256fa0&quot;
+   }
+ }</component>
+   <component name="ProjectColorInfo">{
+@@ -67,38 +62,39 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "Notification.DisplayName-DoNotAsk-Database detector": "Database detector",
+-    "Notification.DoNotAsk-Database detector": "true",
+-    "RequestMappingsPanelOrder0": "0",
+-    "RequestMappingsPanelOrder1": "1",
+-    "RequestMappingsPanelWidth0": "75",
+-    "RequestMappingsPanelWidth1": "75",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "Spring Boot.PipProjectApplication.executor": "Run",
+-    "git-widget-placeholder": "dev",
+-    "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "D:/PIP-2024-2025/proiect-fullstack-PIP",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "project.structure.last.edited": "Project",
+-    "project.structure.proportion": "0.15",
+-    "project.structure.side.proportion": "0.2",
+-    "settings.editor.selected.configurable": "preferences.pluginManager",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;Notification.DisplayName-DoNotAsk-Database detector&quot;: &quot;Database detector&quot;,
++    &quot;Notification.DoNotAsk-Database detector&quot;: &quot;true&quot;,
++    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
++    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
++    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
++    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;Spring Boot.PipProjectApplication.executor&quot;: &quot;Run&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;D:/PIP-2024-2025/proiect-fullstack-PIP&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
++    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   },
+-  "keyToStringList": {
+-    "DatabaseDriversLRU": [
+-      "mysql"
++  &quot;keyToStringList&quot;: {
++    &quot;DatabaseDriversLRU&quot;: [
++      &quot;mysql&quot;
+     ]
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">
+       <recent name="D:\PIP-2024-2025\proiect-fullstack-PIP\backend" />
+@@ -131,8 +127,8 @@
+   <component name="SharedIndexes">
+     <attachedChunks>
+       <set>
+-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
++        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
++        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
+       </set>
+     </attachedChunks>
+   </component>
+@@ -156,6 +152,8 @@
+       <workItem from="1743360184445" duration="944000" />
+       <workItem from="1743367188864" duration="2331000" />
+       <workItem from="1743450758146" duration="4583000" />
++      <workItem from="1744368599738" duration="566000" />
++      <workItem from="1744625697307" duration="100000" />
+     </task>
+     <task id="LOCAL-00001" summary="Connected database">
+       <option name="closed" value="true" />
+@@ -165,15 +163,35 @@
+       <option name="project" value="LOCAL" />
+       <updated>1742937054630</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="Resolved TODOs, tested endpoints for Transaction">
++      <option name="closed" value="true" />
++      <created>1744368073276</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1744368073276</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
+   </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State />
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="Connected database" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Connected database" />
++    <MESSAGE value="Resolved TODOs, tested endpoints for Transaction" />
++    <option name="LAST_COMMIT_MESSAGE" value="Resolved TODOs, tested endpoints for Transaction" />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />
+Index: backend/src/main/java/org/pipproject/pip_project/validators/TransactionDTOValidator.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.pipproject.pip_project.validators;\n\nimport org.pipproject.pip_project.dto.TransactionDTO;\nimport org.pipproject.pip_project.model.TransactionType;\n\npublic class TransactionDTOValidator {\n    public static void validate(TransactionDTO transactionDTO) {\n        if(transactionDTO.getType() == null)\n            throw new IllegalArgumentException((\"TransactionDTO must have a type\"));\n\n\n        if(transactionDTO.getAmount() <=0)\n            throw new IllegalArgumentException((\"Amount must be greater than 0\"));\n\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/src/main/java/org/pipproject/pip_project/validators/TransactionDTOValidator.java b/backend/src/main/java/org/pipproject/pip_project/validators/TransactionDTOValidator.java
+--- a/backend/src/main/java/org/pipproject/pip_project/validators/TransactionDTOValidator.java	(revision 0cd176a01b0ce56188621e839378d14d35ccf641)
++++ b/backend/src/main/java/org/pipproject/pip_project/validators/TransactionDTOValidator.java	(date 1744368327931)
+@@ -1,7 +1,6 @@
+ package org.pipproject.pip_project.validators;
+ 
+ import org.pipproject.pip_project.dto.TransactionDTO;
+-import org.pipproject.pip_project.model.TransactionType;
+ 
+ public class TransactionDTOValidator {
+     public static void validate(TransactionDTO transactionDTO) {

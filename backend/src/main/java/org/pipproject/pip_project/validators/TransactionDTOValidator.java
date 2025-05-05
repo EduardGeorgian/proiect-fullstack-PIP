@@ -1,7 +1,6 @@
 package org.pipproject.pip_project.validators;
 
 import org.pipproject.pip_project.dto.TransactionDTO;
-import org.pipproject.pip_project.model.TransactionType;
 
 public class TransactionDTOValidator {
     public static void validate(TransactionDTO transactionDTO) {
