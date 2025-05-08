@@ -34,7 +34,7 @@ export default function FriendsPage() {
 
     fetchFriends();
   });
-
+  //empty commit
   return (
     <>
       <UserProfileCard
