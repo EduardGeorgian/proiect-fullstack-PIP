@@ -8,19 +8,12 @@ export const getTransactionsByUserEmail = async (email: string) => {
   });
 };
 
-export const sendTransaction = async (
-  initiatorEmail: string,
-  transactionType: string,
-  amount: number,
-  sourceAccountId: number,
-  destinationAccountId: number
-) => {
-  const response = await axios.post(`${API_BASE_URL}/transactions/send`, {
-    initiatorEmail,
-    transactionType,
-    amount,
-    sourceAccountId,
-    destinationAccountId,
-  });
-  return response.data;
+export const sendTransaction = async (payload: {
+  initiatorEmail: string;
+  type: "TRANSFER";
+  amount: number;
+  sourceAccountId: number;
+  destinationAccountId: number;
+}) => {
+  return await axios.post(`${API_BASE_URL}/transactions/send`, payload);
 };

@@ -4,26 +4,28 @@ import { Transaction } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { getTransactionsByUserEmail } from "@/services/transactionService";
-import { useLocation } from "react-router-dom";
 import UserProfileCard from "@/components/user/UserProfileCard";
 
 export default function TransactionsPage() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
-  const [email, setEmail] = useState<string | null>(null);
-  const { pathname } = useLocation(); // for refresh on route change
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    setEmail(user?.email);
-  }, [pathname]); // update when path changes
+  const [user, setUser] = useState<{ username: string; email: string } | null>(
+    null
+  );
 
   useEffect(() => {
+    const stored = localStorage.getItem("user");
+    if (!stored) {
+      setLoading(false);
+      return;
+    }
+
+    const parsedUser = JSON.parse(stored);
+    setUser(parsedUser);
+
     const fetchTransactions = async () => {
-      if (!email) return;
-
       try {
-        const res = await getTransactionsByUserEmail(email);
+        const res = await getTransactionsByUserEmail(parsedUser.email);
         setTransactions(res.data);
       } catch (err) {
         console.error("Failed to fetch transactions:", err);
@@ -33,17 +35,17 @@ export default function TransactionsPage() {
     };
 
     fetchTransactions();
-  }, [email]); // run only when email is set
+  }, []);
+
+  if (loading) return <Skeleton className="w-full h-32" />;
+  if (!user) return <p>Utilizator inexistent.</p>;
 
   return (
     <>
       <UserProfileCard username={user.username} email={user.email} />
-
       <h2 className="text-2xl font-bold mt-4">Transactions</h2>
 
-      {loading ? (
-        <Skeleton className="w-full h-32" />
-      ) : transactions.length > 0 ? (
+      {transactions.length > 0 ? (
         transactions.map((tx) => (
           <Card
             className="hover:shadow-lg transition-shadow cursor-pointer mb-4"
@@ -93,7 +95,7 @@ export default function TransactionsPage() {
           </Card>
         ))
       ) : (
-        <p>No transactions found.</p>
+        <p className="text-muted-foreground">No transactions found.</p>
       )}
     </>
   );
