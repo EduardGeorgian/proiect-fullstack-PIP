@@ -2,28 +2,33 @@ import { Skeleton } from "@/components/ui/skeleton";
 import FriendCard from "@/components/user/FriendCard";
 import UserProfileCard from "@/components/user/UserProfileCard";
 import { User } from "@/lib/types";
-import { getUserFriends } from "@/services/userService";
+import { getUserDashboard, getUserFriends } from "@/services/userService";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import SendMoneyDialog from "@/components/user/SendMoneyDialog";
+import { sendTransaction } from "@/services/transactionService";
+import { toast } from "sonner";
+import { CheckCircle, XCircle } from "lucide-react";
 
 export default function FriendsPage() {
+  const [user, setUser] = useState<User | null>(null);
   const [friends, setFriends] = useState<User[]>([]);
+  const [selectedFriend, setSelectedFriend] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
-  const [id, setId] = useState<string | null>(null);
-  const { pathname } = useLocation(); // for refresh on route change
+  const [accounts, setAccounts] = useState([]);
+  const [friendAccounts, setFriendAccounts] = useState([]);
+  const [transferBalance, setTransferBalance] = useState<string | null>(null);
 
+  // Load user from localStorage and fetch friends
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    setId(user?.id);
-  }, [pathname]); // update when path changes
+    const stored = localStorage.getItem("user");
+    if (!stored) return;
 
-  useEffect(() => {
+    const parsedUser = JSON.parse(stored);
+    setUser(parsedUser);
+
     const fetchFriends = async () => {
-      if (!id) return;
-
       try {
-        const res = await getUserFriends(id);
+        const res = await getUserFriends(parsedUser.id);
         setFriends(res.data);
       } catch (err) {
         console.error("Failed to fetch friends:", err);
@@ -33,14 +38,84 @@ export default function FriendsPage() {
     };
 
     fetchFriends();
-  });
-  //empty commit
+  }, []);
+
+  // Fetch account info when selecting a friend
+  useEffect(() => {
+    const fetchAccounts = async () => {
+      if (!user || !selectedFriend) return;
+
+      try {
+        const data = await getUserDashboard(String(user.id));
+        const friendData = await getUserDashboard(String(selectedFriend.id));
+
+        setAccounts(data.accounts);
+        setFriendAccounts(friendData.accounts);
+        setTransferBalance(data.accounts[0]?.currency || null);
+      } catch (err) {
+        console.error("Eroare la fetch dashboard:", err);
+      }
+    };
+
+    fetchAccounts();
+  }, [selectedFriend, user]);
+
+  const handleSendMoney = async (
+    amount: number,
+    sourceAccountId: number,
+    destinationAccountId: number
+  ) => {
+    if (!selectedFriend || !user?.email) return;
+
+    try {
+      await sendTransaction({
+        initiatorEmail: user.email,
+        type: "TRANSFER",
+        amount,
+        sourceAccountId,
+        destinationAccountId,
+      });
+
+      toast.success(
+        `You sent ${amount} ${transferBalance} to ${selectedFriend.username}`,
+        {
+          icon: <CheckCircle className="text-green-500" />,
+          action: {
+            label: "OK",
+            onClick: (
+              _event: React.MouseEvent<HTMLButtonElement>,
+              toastId?: string | number
+            ) => {
+              toast.dismiss(toastId);
+            },
+          },
+        }
+      );
+
+      setSelectedFriend(null);
+    } catch (err) {
+      console.error("Error during transaction:", err);
+      toast.error("Transaction failed. Please try again.", {
+        icon: <XCircle className="text-red-500" />,
+        action: {
+          label: "OK",
+          onClick: (
+            _event: React.MouseEvent<HTMLButtonElement>,
+            toastId?: string | number
+          ) => {
+            toast.dismiss(toastId);
+          },
+        },
+      });
+    }
+  };
+
+  if (!user) return <div>Se încarcă...</div>;
+
   return (
     <>
-      <UserProfileCard
-        username={user.username}
-        email={user.email}
-      ></UserProfileCard>
+      <UserProfileCard username={user.username} email={user.email} />
+
       <h2 className="text-2xl font-bold mt-4">Friends</h2>
 
       {loading ? (
@@ -48,17 +123,29 @@ export default function FriendsPage() {
       ) : friends.length > 0 ? (
         friends.map((friend) => (
           <div
-            className="hover:shadow-lg transition-shadow cursor-pointer mb-4 "
             key={friend.id}
+            className="hover:shadow-lg transition-shadow cursor-pointer mb-4"
           >
             <FriendCard
               username={friend.username}
               email={friend.email}
-            ></FriendCard>
+              onSendClick={() => setSelectedFriend(friend)}
+            />
           </div>
         ))
       ) : (
         <p className="text-muted-foreground">No friends found.</p>
+      )}
+
+      {selectedFriend && (
+        <SendMoneyDialog
+          open={!!selectedFriend}
+          onClose={() => setSelectedFriend(null)}
+          onSend={handleSendMoney}
+          recipientName={selectedFriend.username}
+          userAccounts={accounts}
+          friendAccounts={friendAccounts}
+        />
       )}
     </>
   );

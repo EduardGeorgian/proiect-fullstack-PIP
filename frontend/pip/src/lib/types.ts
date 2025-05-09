@@ -16,7 +16,7 @@ export interface Transaction {
   amount: number;
   type: string;
   date: string;
-  sourceAccount: Account;
-  destinationAccount: Account;
+  sourceAccount: Account | null;
+  destinationAccount: Account | null;
   status: string;
 }

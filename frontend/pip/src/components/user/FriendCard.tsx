@@ -5,9 +5,10 @@ import { Button } from "../ui/button";
 interface Props {
   username: string;
   email: string;
+  onSendClick?: () => void;
 }
 
-export default function UserProfileCard({ username, email }: Props) {
+export default function FriendCard({ username, email, onSendClick }: Props) {
   return (
     <Card className="flex flex-row  justify-between items-start  gap-4 p-4 relative ">
       <CardContent className="flex flex-row gap-4 items-start">
@@ -26,6 +27,7 @@ export default function UserProfileCard({ username, email }: Props) {
           <Button
             variant="outline"
             className="size-sm cursor-pointer bg-gray-200 hover:bg-green-300"
+            onClick={onSendClick}
           >
             Send
           </Button>

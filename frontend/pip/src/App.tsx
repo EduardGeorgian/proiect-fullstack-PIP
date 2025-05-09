@@ -6,23 +6,30 @@ import { LoginForm } from "./pages/Login";
 import ProtectedRoute from "./components/routes/ProtectedRoute";
 import TransactionsPage from "./pages/TransactionsPage";
 import FriendsPage from "./pages/FriendsPage";
+import { Toaster } from "./components/ui/sonner";
+import { UserProvider } from "./context/UserContext";
+
+// TODO: Check routes to see if the problem with the id undefined has something to do with it
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <div className="p-6">
-        <Routes>
-          <Route path="/login" element={<LoginForm />} />={" "}
-          <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<Dashboard />} />={" "}
-            <Route path="/dashboard/:id" element={<Dashboard />} />={" "}
-            <Route path="/transactions/:id" element={<TransactionsPage />} />={" "}
-            <Route path="/friends/:id" element={<FriendsPage />} />={" "}
-          </Route>
-        </Routes>
-      </div>
-    </Router>
+    <UserProvider>
+      <Router>
+        <Navbar />
+        <div className="p-6">
+          <Routes>
+            <Route path="/login" element={<LoginForm />} />={" "}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/" element={<Dashboard />} />={" "}
+              <Route path="/dashboard/:id" element={<Dashboard />} />={" "}
+              <Route path="/transactions/:id" element={<TransactionsPage />} />={" "}
+              <Route path="/friends/:id" element={<FriendsPage />} />={" "}
+            </Route>
+          </Routes>
+        </div>
+        <Toaster position="top-right" />
+      </Router>
+    </UserProvider>
   );
 }
 
