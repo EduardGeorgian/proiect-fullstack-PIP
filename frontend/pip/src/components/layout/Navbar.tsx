@@ -23,7 +23,7 @@ export default function Navbar() {
       <Link to={`/transactions/${id}`} className={linkStyle(`/transactions`)}>
         Transactions
       </Link>
-      <Link to="/friends" className={linkStyle("/friends")}>
+      <Link to={`/friends/${id}`} className={linkStyle("/friends")}>
         Friends
       </Link>
     </nav>
