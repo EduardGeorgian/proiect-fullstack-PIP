@@ -16,12 +16,6 @@ export const loginUser = async (email: string, password: string) => {
   return response.data;
 };
 
-export const getTransactionsByUserEmail = async (email: string) => {
-  return await axios.get(`${API_BASE_URL}/transactions`, {
-    params: { initiatorEmail: email },
-  });
-};
-
 export const getUserFriends = async (id: string) => {
   return await axios.get(`${API_BASE_URL}/friends`, {
     params: { id: id },
