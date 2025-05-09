@@ -2,27 +2,26 @@ package org.pipproject.pip_project.business;
 
 
 import jakarta.transaction.Transactional;
-import org.pipproject.pip_project.model.Account;
-import org.pipproject.pip_project.model.Transaction;
-import org.pipproject.pip_project.model.TransactionStatus;
-import org.pipproject.pip_project.model.TransactionType;
+import org.pipproject.pip_project.model.*;
 import org.pipproject.pip_project.repositories.AccountRepository;
 import org.pipproject.pip_project.repositories.TransactionRepository;
+import org.pipproject.pip_project.repositories.UserRepository;
 import org.pipproject.pip_project.validators.TransactionValidator;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final AccountRepository accountRepository;
+    private final UserRepository userRepository;
 
-    public TransactionService(TransactionRepository transactionRepository, AccountRepository accountRepository) {
+    public TransactionService(TransactionRepository transactionRepository, AccountRepository accountRepository, UserRepository userRepository) {
         this.transactionRepository = transactionRepository;
         this.accountRepository = accountRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional
@@ -34,7 +33,7 @@ public class TransactionService {
         accountRepository.save(sourceAccount);
         accountRepository.save(destinationAccount);
 
-        Transaction transaction = new Transaction(initiatorEmail, TransactionType.TRANSFER, new Date(), amount, sourceAccount, destinationAccount, TransactionStatus.PENDING);
+        Transaction transaction = new Transaction(initiatorEmail, TransactionType.TRANSFER, new Date(), amount, sourceAccount, destinationAccount, TransactionStatus.COMPLETED);
         return transactionRepository.save(transaction);
     }
 
@@ -45,7 +44,7 @@ public class TransactionService {
         sourceAccount.setBalance(sourceAccount.getBalance() - amount);
         accountRepository.save(sourceAccount);
 
-        Transaction transaction = new Transaction(initiatorEmail, TransactionType.WITHDRAWAL, new Date(), amount, sourceAccount, null, TransactionStatus.PENDING);
+        Transaction transaction = new Transaction(initiatorEmail, TransactionType.WITHDRAWAL, new Date(), amount, sourceAccount, null, TransactionStatus.COMPLETED);
         return transactionRepository.save(transaction);
     }
 
@@ -56,12 +55,29 @@ public class TransactionService {
         destinationAccount.setBalance(destinationAccount.getBalance() + amount);
         accountRepository.save(destinationAccount);
 
-        Transaction transaction = new Transaction(initiatorEmail, TransactionType.DEPOSIT, new Date(), amount, destinationAccount, null, TransactionStatus.PENDING);
+        Transaction transaction = new Transaction(initiatorEmail, TransactionType.DEPOSIT, new Date(), amount, destinationAccount, null, TransactionStatus.COMPLETED);
         return transactionRepository.save(transaction);
     }
 
-    public List<Transaction> getAllTransactions(String initiatorEmail) {
-        return transactionRepository.findByInitiatorEmailOrderByDateDesc(initiatorEmail);
+    public List<Transaction> getAllTransactions(String initiatorEmail) throws Exception {
+        Optional<User> userOpt = userRepository.findByEmail(initiatorEmail);
+        if (userOpt.isEmpty()) {
+            throw new Exception("User not found");
+        }
+
+        User user = userOpt.get();
+
+        List<Transaction> initiated = transactionRepository.findByInitiatorEmailOrderByDateDesc(initiatorEmail);
+        List<Transaction> received = transactionRepository.findByDestinationAccountIdOrderByDateDesc(user.getId());
+
+        List<Transaction> all = new ArrayList<>();
+        if (initiated != null) all.addAll(initiated);
+        if (received != null) all.addAll(received);
+
+        all.sort(Comparator.comparing(Transaction::getDate).reversed());
+
+        return all;
     }
+
 
 }
