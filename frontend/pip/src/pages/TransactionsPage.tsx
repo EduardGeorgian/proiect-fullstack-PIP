@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Transaction } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
-import { getTransactionsByUserEmail } from "@/services/userService";
+import { getTransactionsByUserEmail } from "@/services/transactionService";
 import { useLocation } from "react-router-dom";
 import UserProfileCard from "@/components/user/UserProfileCard";
 
@@ -37,10 +37,7 @@ export default function TransactionsPage() {
 
   return (
     <>
-      <UserProfileCard
-        username={user.username}
-        email={user.email}
-      ></UserProfileCard>
+      <UserProfileCard username={user.username} email={user.email} />
 
       <h2 className="text-2xl font-bold mt-4">Transactions</h2>
 
@@ -49,7 +46,7 @@ export default function TransactionsPage() {
       ) : transactions.length > 0 ? (
         transactions.map((tx) => (
           <Card
-            className="hover:shadow-lg transition-shadow cursor-pointer mb-4 "
+            className="hover:shadow-lg transition-shadow cursor-pointer mb-4"
             key={tx.id}
           >
             <CardContent className="p-4 space-y-1">
@@ -59,13 +56,28 @@ export default function TransactionsPage() {
                   {format(new Date(tx.date), "PPPpp")}
                 </p>
               </div>
+
               <p className="text-lg font-bold">
-                {tx.amount} {tx.sourceAccount.currency}
+                {tx.amount}{" "}
+                {tx.sourceAccount?.currency ||
+                  tx.destinationAccount?.currency ||
+                  ""}
               </p>
+
               <p className="text-sm">
-                From Account <strong>#{tx.sourceAccount.id}</strong> → To
-                Account <strong>#{tx.destinationAccount.id}</strong>
+                {tx.sourceAccount && (
+                  <>
+                    From Account <strong>#{tx.sourceAccount.id}</strong>
+                  </>
+                )}
+                {tx.sourceAccount && tx.destinationAccount && " → "}
+                {tx.destinationAccount && (
+                  <>
+                    To Account <strong>#{tx.destinationAccount.id}</strong>
+                  </>
+                )}
               </p>
+
               <p
                 className={`text-sm ${
                   tx.status === "PENDING"

@@ -7,7 +7,16 @@ interface Props {
   email: string;
 }
 
-export default function UserProfileCard({ username, email }: Props) {
+export default function FriendCard({ username, email }: Props) {
+  // const [loading, setLoading] = useState(true);
+  // const [userEmail, setEmail] = useState<string | null>(null);
+  // const { pathname } = useLocation(); // for refresh on route change
+  // const user = JSON.parse(localStorage.getItem("user") || "{}");
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem("user") || "{}");
+  //   setEmail(user?.email);
+  // }, [pathname]);
+
   return (
     <Card className="flex flex-row  justify-between items-start  gap-4 p-4 relative ">
       <CardContent className="flex flex-row gap-4 items-start">
@@ -26,6 +35,10 @@ export default function UserProfileCard({ username, email }: Props) {
           <Button
             variant="outline"
             className="size-sm cursor-pointer bg-gray-200 hover:bg-green-300"
+            onClick={() => {
+              // Handle send money action here
+              console.log("Send money to", username);
+            }}
           >
             Send
           </Button>
