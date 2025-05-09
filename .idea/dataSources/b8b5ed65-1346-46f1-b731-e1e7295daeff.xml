@@ -93,7 +93,6 @@
 |root||root|localhost|grant option|G
 performance_schema|schema||mysql.session|localhost|SELECT|G
 sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
-      <ServerVersion>8.0.33</ServerVersion>
     </root>
     <collation id="2" parent="1" name="armscii8_bin">
       <Charset>armscii8</Charset>
@@ -1005,202 +1004,156 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <schema id="291" parent="1" name="proiect_pip">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2025-04-04.05:27:11</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="292" parent="1" name="sys">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="293" parent="1" name="todolist">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <user id="294" parent="1" name="mysql.infoschema">
       <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <user id="295" parent="1" name="mysql.session">
       <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <user id="296" parent="1" name="mysql.sys">
       <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <user id="297" parent="1" name="root">
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <table id="298" parent="291" name="account">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="299" parent="291" name="account_transactions">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="300" parent="291" name="transaction">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="301" parent="291" name="user">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="302" parent="298" name="id">
       <AutoIncrement>1</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="303" parent="298" name="balance">
       <Position>2</Position>
       <StoredType>double|0s</StoredType>
     </column>
-    <column id="304" parent="298" name="currency">
       <Position>3</Position>
       <StoredType>enum(&apos;EUR&apos;, &apos;RON&apos;, &apos;USD&apos;)|0e</StoredType>
     </column>
-    <column id="305" parent="298" name="user_id">
       <Position>4</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <foreign-key id="306" parent="298" name="FK7m8ru44m93ukyb61dfxw0apf6">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <index id="307" parent="298" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="308" parent="298" name="FK7m8ru44m93ukyb61dfxw0apf6">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="309" parent="298" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="310" parent="299" name="account_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="311" parent="299" name="transactions_id">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <foreign-key id="312" parent="299" name="FKbrn3bd376gr5d364db3tn3rx9">
       <ColNames>account_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>account</RefTableName>
     </foreign-key>
-    <foreign-key id="313" parent="299" name="FKbo9ocnxyf4qmchbuu7nwgfw90">
       <ColNames>transactions_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>transaction</RefTableName>
     </foreign-key>
-    <index id="314" parent="299" name="UKhwp3451tqfjdhmlqw8ruc7y0k">
       <ColNames>transactions_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="315" parent="299" name="FKbrn3bd376gr5d364db3tn3rx9">
       <ColNames>account_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="316" parent="299" name="UKhwp3451tqfjdhmlqw8ruc7y0k">
       <UnderlyingIndexName>UKhwp3451tqfjdhmlqw8ruc7y0k</UnderlyingIndexName>
     </key>
-    <column id="317" parent="300" name="id">
       <AutoIncrement>1</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="318" parent="300" name="amount">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>double|0s</StoredType>
     </column>
-    <column id="319" parent="300" name="date">
       <Position>3</Position>
       <StoredType>datetime(6)|0s</StoredType>
     </column>
-    <column id="320" parent="300" name="status">
       <Position>4</Position>
       <StoredType>enum(&apos;COMPLETED&apos;, &apos;FAILED&apos;, &apos;PENDING&apos;)|0e</StoredType>
     </column>
-    <column id="321" parent="300" name="type">
       <Position>5</Position>
       <StoredType>enum(&apos;DEPOSIT&apos;, &apos;TRANSFER&apos;, &apos;WITHDRAWAL&apos;)|0e</StoredType>
     </column>
-    <column id="322" parent="300" name="destination_account_id">
       <Position>6</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="323" parent="300" name="source_account_id">
       <Position>7</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <foreign-key id="324" parent="300" name="FKan2cq79w1pqavplm9nbu5aef0">
       <ColNames>destination_account_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>account</RefTableName>
     </foreign-key>
-    <foreign-key id="325" parent="300" name="FK25e716ukpqahttjt6c487lrer">
       <ColNames>source_account_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>account</RefTableName>
     </foreign-key>
-    <index id="326" parent="300" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="327" parent="300" name="FKan2cq79w1pqavplm9nbu5aef0">
       <ColNames>destination_account_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="328" parent="300" name="FK25e716ukpqahttjt6c487lrer">
       <ColNames>source_account_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="329" parent="300" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="330" parent="301" name="id">
-      <AutoIncrement>1</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="331" parent="301" name="email">
       <Position>2</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <column id="332" parent="301" name="password">
       <Position>3</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <column id="333" parent="301" name="username">
       <Position>4</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <index id="334" parent="301" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="335" parent="301" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

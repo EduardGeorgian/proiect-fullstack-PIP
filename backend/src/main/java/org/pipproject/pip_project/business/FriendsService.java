@@ -36,11 +36,15 @@ public class FriendsService {
     }
 
     public List<User> getAllFriends(User user) {
-        List<Friends> result = friendsRepository.findAllByUserAndStatus(Optional.ofNullable(user),FriendRequestStatus.ACCEPTED);
+        List<Friends> asUser = friendsRepository.findAllByUserAndStatus(Optional.ofNullable(user), FriendRequestStatus.ACCEPTED);
+        List<Friends> asFriend = friendsRepository.findAllByFriendAndStatus(Optional.ofNullable(user), FriendRequestStatus.ACCEPTED);
+
         List<User> friends = new ArrayList<>();
-        for(Friends friend : result) {
-            friends.add(friend.getFriend());
-        }
+        asUser.forEach(f -> friends.add(f.getFriend()));
+        asFriend.forEach(f -> friends.add(f.getUser()));
+
         return friends;
+
     }
+
 }

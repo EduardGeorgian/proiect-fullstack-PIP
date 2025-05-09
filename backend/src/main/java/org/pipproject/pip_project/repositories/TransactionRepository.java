@@ -10,4 +10,5 @@ import java.util.List;
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
     List<Transaction> findBySourceAccountId(Long id);
     List<Transaction> findByInitiatorEmailOrderByDateDesc(String email);
+    List<Transaction> findByDestinationAccountIdOrderByDateDesc(Long id);
 }
