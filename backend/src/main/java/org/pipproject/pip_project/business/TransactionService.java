@@ -26,29 +26,39 @@ public class TransactionService {
     }
 
     @Transactional
-    public Transaction addTransaction(String initiatorEmail,TransactionType type, double amount, Account sourceAccount, Account destinationAccount, TransactionStatus status) {
+    public Transaction addTransfer(String initiatorEmail, double amount, Account sourceAccount, Account destinationAccount) {
+        TransactionValidator.validate(TransactionType.TRANSFER, amount, sourceAccount, destinationAccount);
 
-        TransactionValidator.validate(type, amount, sourceAccount, destinationAccount);
+        sourceAccount.setBalance(sourceAccount.getBalance() - amount);
+        destinationAccount.setBalance(destinationAccount.getBalance() + amount);
+        accountRepository.save(sourceAccount);
+        accountRepository.save(destinationAccount);
 
-        Transaction transaction = new Transaction(initiatorEmail,type, new Date(), amount, sourceAccount, destinationAccount, status);
-
-        if (type == TransactionType.TRANSFER) {
-            sourceAccount.setBalance(sourceAccount.getBalance() - amount);
-            destinationAccount.setBalance(destinationAccount.getBalance() + amount);
-            accountRepository.save(sourceAccount);
-            accountRepository.save(destinationAccount);
-        } else if (type == TransactionType.WITHDRAWAL) {
-            sourceAccount.setBalance(sourceAccount.getBalance() - amount);
-            accountRepository.save(sourceAccount);
-        } else if (type == TransactionType.DEPOSIT) {
-            sourceAccount.setBalance(sourceAccount.getBalance() + amount);
-            accountRepository.save(sourceAccount);
-        }
-
+        Transaction transaction = new Transaction(initiatorEmail, TransactionType.TRANSFER, new Date(), amount, sourceAccount, destinationAccount, TransactionStatus.PENDING);
         return transactionRepository.save(transaction);
-
     }
 
+    @Transactional
+    public Transaction addWithdrawal(String initiatorEmail, double amount, Account sourceAccount) {
+        TransactionValidator.validate(TransactionType.WITHDRAWAL, amount, sourceAccount, null);
+
+        sourceAccount.setBalance(sourceAccount.getBalance() - amount);
+        accountRepository.save(sourceAccount);
+
+        Transaction transaction = new Transaction(initiatorEmail, TransactionType.WITHDRAWAL, new Date(), amount, sourceAccount, null, TransactionStatus.PENDING);
+        return transactionRepository.save(transaction);
+    }
+
+    @Transactional
+    public Transaction addDeposit(String initiatorEmail, double amount, Account destinationAccount) {
+        TransactionValidator.validate(TransactionType.DEPOSIT, amount, destinationAccount, null);
+
+        destinationAccount.setBalance(destinationAccount.getBalance() + amount);
+        accountRepository.save(destinationAccount);
+
+        Transaction transaction = new Transaction(initiatorEmail, TransactionType.DEPOSIT, new Date(), amount, destinationAccount, null, TransactionStatus.PENDING);
+        return transactionRepository.save(transaction);
+    }
 
     public List<Transaction> getAllTransactions(String initiatorEmail) {
         return transactionRepository.findByInitiatorEmailOrderByDateDesc(initiatorEmail);
