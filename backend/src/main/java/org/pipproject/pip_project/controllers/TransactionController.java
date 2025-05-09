@@ -8,8 +8,6 @@ import org.pipproject.pip_project.model.Account;
 import org.pipproject.pip_project.model.Transaction;
 import org.pipproject.pip_project.model.TransactionStatus;
 import org.pipproject.pip_project.model.TransactionType;
-import org.pipproject.pip_project.repositories.AccountRepository;
-import org.pipproject.pip_project.validators.TransactionDTOValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,45 +31,71 @@ public class TransactionController {
         this.accountService = accountService;
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<?> addTransaction(@RequestBody TransactionDTO transactionDTO) {
+    @PostMapping("/send")
+    public ResponseEntity<?> addTransfer(@RequestBody TransactionDTO transactionDTO) {
         try {
-
-            Account sourceAccount = transactionDTO.getSourceAccountId() != null ?
-                    accountService.getAccountById(transactionDTO.getSourceAccountId()) : null;
-            Account destinationAccount = transactionDTO.getDestinationAccountId() != null ?
-                    accountService.getAccountById(transactionDTO.getDestinationAccountId()) : null;
-
-            if (transactionDTO.getType() == TransactionType.TRANSFER &&
-                    (sourceAccount == null || destinationAccount == null)) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Both source and destination accounts are required for transfers.");
+            if (transactionDTO.getSourceAccountId() == null || transactionDTO.getDestinationAccountId() == null) {
+                return ResponseEntity.badRequest().body("Source and destination accounts are required.");
             }
 
-            if (transactionDTO.getType() == TransactionType.WITHDRAWAL && sourceAccount == null) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Source account is required for withdrawals.");
-            }
+            Account sourceAccount = accountService.getAccountById(transactionDTO.getSourceAccountId());
+            Account destinationAccount = accountService.getAccountById(transactionDTO.getDestinationAccountId());
 
-            if (transactionDTO.getType() == TransactionType.DEPOSIT && destinationAccount == null) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Destination account is required for deposits.");
-            }
-
-            Transaction responseTransaction = transactionService.addTransaction(
+            Transaction transaction = transactionService.addTransfer(
                     transactionDTO.getInitiatorEmail(),
-                    transactionDTO.getType(),
                     transactionDTO.getAmount(),
                     sourceAccount,
-                    destinationAccount,
-                    TransactionStatus.PENDING
+                    destinationAccount
             );
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(responseTransaction);
-
+            return ResponseEntity.status(HttpStatus.CREATED).body(transaction);
         } catch (Exception e) {
-            Map<String,String> response = new HashMap<>();
-            response.put("error",e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
     }
+
+    @PostMapping("/withdraw")
+    public ResponseEntity<?> addWithdrawal(@RequestBody TransactionDTO transactionDTO) {
+        try {
+            if (transactionDTO.getSourceAccountId() == null) {
+                return ResponseEntity.badRequest().body("Source account is required.");
+            }
+
+            Account sourceAccount = accountService.getAccountById(transactionDTO.getSourceAccountId());
+
+            Transaction transaction = transactionService.addWithdrawal(
+                    transactionDTO.getInitiatorEmail(),
+                    transactionDTO.getAmount(),
+                    sourceAccount
+            );
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(transaction);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
+    }
+
+    @PostMapping("/deposit")
+    public ResponseEntity<?> addDeposit(@RequestBody TransactionDTO transactionDTO) {
+        try {
+            if (transactionDTO.getDestinationAccountId() == null) {
+                return ResponseEntity.badRequest().body("Destination account is required.");
+            }
+
+            Account destinationAccount = accountService.getAccountById(transactionDTO.getDestinationAccountId());
+
+            Transaction transaction = transactionService.addDeposit(
+                    transactionDTO.getInitiatorEmail(),
+                    transactionDTO.getAmount(),
+                    destinationAccount
+            );
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(transaction);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
+    }
+
     @GetMapping("")
     public ResponseEntity<?> getAllTransactions(@RequestParam String initiatorEmail) {
         try{
