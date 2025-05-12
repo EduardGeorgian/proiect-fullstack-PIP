@@ -16,4 +16,5 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
    @Query("SELECT new org.pipproject.pip_project.dto.AccountSendTransactionDTO(a.id, a.currency) " +
            "FROM Account a WHERE a.user = :user")
    List<AccountSendTransactionDTO> findAccountSendTransactionDTOByUser(Optional<User> user);
+   Account findFirstByUser(Optional<User> user);
 }
