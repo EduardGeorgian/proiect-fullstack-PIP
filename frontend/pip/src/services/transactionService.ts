@@ -17,3 +17,25 @@ export const sendTransaction = async (payload: {
 }) => {
   return await axios.post(`${API_BASE_URL}/transactions/send`, payload);
 };
+
+export const requestTransaction = async (payload: {
+  amount: number;
+  description: string;
+  requesterEmail: string;
+  recipientEmail: string;
+  sourceAccountId: number | null;
+}) => {
+  return await axios.post(`${API_BASE_URL}/requests/add`, payload);
+};
+
+export const getSentTransactionRequests = async (email: string) => {
+  return await axios.get(`${API_BASE_URL}/requests/sent`, {
+    params: { requesterEmail: email },
+  });
+};
+
+export const getReceivedTransactionRequests = async (email: string) => {
+  return await axios.get(`${API_BASE_URL}/requests/received`, {
+    params: { recipientEmail: email },
+  });
+};

@@ -20,3 +20,18 @@ export interface Transaction {
   destinationAccount: Account | null;
   status: string;
 }
+
+export interface TransferRequest {
+  id: number;
+  amount: number;
+  description: string;
+  date: string;
+  status: string;
+  currency: string;
+  recipient: {
+    email: string;
+  };
+  requester: {
+    email: string;
+  };
+}
