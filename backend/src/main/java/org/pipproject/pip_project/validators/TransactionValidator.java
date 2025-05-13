@@ -16,7 +16,7 @@ public class TransactionValidator {
                 throw new IllegalArgumentException("Insufficient funds in the source account");
         }
 
-        if(type == TransactionType.TRANSFER || type == TransactionType.DEPOSIT){
+        if(type == TransactionType.TRANSFER){
             if(destinationAccount == null)
                 throw new IllegalArgumentException("Destination account cannot be null");
         }

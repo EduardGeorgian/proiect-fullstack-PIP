@@ -1,0 +1,104 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"f01bce7e-f171-4b66-ae54-0d22899699fc\" name=\"Changes\" comment=\"LOTS AND LOTS\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/TransactionService.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/TransactionService.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/repositories/TransactionRepository.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/repositories/TransactionRepository.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;EduardGeorgian&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubProjectSettings\">\r\n    <option name=\"branchProtectionPatterns\">\r\n      <list>\r\n        <option value=\"main\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/EduardGeorgian/proiect-fullstack-PIP.git&quot;,\r\n    &quot;accountId&quot;: &quot;18695d12-5217-4086-901d-ab5fd791fbb3&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 6\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2uodnmfqMSfE7Z7YatEeepW3MkT\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;Notification.DisplayName-DoNotAsk-Database detector&quot;: &quot;Database detector&quot;,\r\n    &quot;Notification.DoNotAsk-Database detector&quot;: &quot;true&quot;,\r\n    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,\r\n    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,\r\n    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,\r\n    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;Spring Boot.PipProjectApplication.executor&quot;: &quot;Run&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;D:/PIP-2024-2025/proiect-fullstack-PIP&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  },\r\n  &quot;keyToStringList&quot;: {\r\n    &quot;DatabaseDriversLRU&quot;: [\r\n      &quot;mysql&quot;\r\n    ]\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\PIP-2024-2025\\proiect-fullstack-PIP\\backend\" />\r\n      <recent name=\"D:\\PIP-2024-2025\\proiect-fullstack-PIP/backend\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\r\n      <module name=\"proiect-fullstack-PIP\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\r\n      <module name=\"proiect-fullstack-PIP\" />\r\n      <option name=\"filePath\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"PipProjectApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <option name=\"FRAME_DEACTIVATION_UPDATE_POLICY\" value=\"UpdateClassesAndResources\" />\r\n      <module name=\"PIP_project\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"org.pipproject.pip_project.PipProjectApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145\" />\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"f01bce7e-f171-4b66-ae54-0d22899699fc\" name=\"Changes\" comment=\"\" />\r\n      <created>1742919029177</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1742919029177</updated>\r\n      <workItem from=\"1742919030287\" duration=\"2141000\" />\r\n      <workItem from=\"1742921219278\" duration=\"400000\" />\r\n      <workItem from=\"1742921640409\" duration=\"195000\" />\r\n      <workItem from=\"1742934864692\" duration=\"876000\" />\r\n      <workItem from=\"1742935755584\" duration=\"1191000\" />\r\n      <workItem from=\"1743018364143\" duration=\"2799000\" />\r\n      <workItem from=\"1743023329694\" duration=\"4217000\" />\r\n      <workItem from=\"1743027567730\" duration=\"389000\" />\r\n      <workItem from=\"1743027967471\" duration=\"2988000\" />\r\n      <workItem from=\"1743360184445\" duration=\"944000\" />\r\n      <workItem from=\"1743367188864\" duration=\"2331000\" />\r\n      <workItem from=\"1743450758146\" duration=\"4583000\" />\r\n      <workItem from=\"1745402876602\" duration=\"1501000\" />\r\n      <workItem from=\"1745571595474\" duration=\"9601000\" />\r\n      <workItem from=\"1745610350200\" duration=\"1702000\" />\r\n      <workItem from=\"1745662144201\" duration=\"1396000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Connected database\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1742937054630</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1742937054630</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"LOTS AND LOTS\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1745613608272</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1745613608272</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Connected database\" />\r\n    <MESSAGE value=\"LOTS AND LOTS\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"LOTS AND LOTS\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 24fcdb0e9957dfef653372e266b61c06b4dde44f)
++++ b/.idea/workspace.xml	(date 1745768755863)
+@@ -4,10 +4,8 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="f01bce7e-f171-4b66-ae54-0d22899699fc" name="Changes" comment="LOTS AND LOTS">
++    <list default="true" id="f01bce7e-f171-4b66-ae54-0d22899699fc" name="Changes" comment="Implemented TransactionController,Service,Dto,Repository">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/TransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/TransactionService.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/repositories/TransactionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/repositories/TransactionRepository.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -36,17 +34,10 @@
+     &quot;assignee&quot;: &quot;EduardGeorgian&quot;
+   }
+ }</component>
+-  <component name="GithubProjectSettings">
+-    <option name="branchProtectionPatterns">
+-      <list>
+-        <option value="main" />
+-      </list>
+-    </option>
+-  </component>
+   <component name="GithubPullRequestsUISettings">{
+   &quot;selectedUrlAndAccountId&quot;: {
+     &quot;url&quot;: &quot;https://github.com/EduardGeorgian/proiect-fullstack-PIP.git&quot;,
+-    &quot;accountId&quot;: &quot;18695d12-5217-4086-901d-ab5fd791fbb3&quot;
++    &quot;accountId&quot;: &quot;29f0f39f-d8bb-4756-ad8d-dc098574bc67&quot;
+   }
+ }</component>
+   <component name="ProjectColorInfo">{
+@@ -70,7 +61,6 @@
+     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+     &quot;Spring Boot.PipProjectApplication.executor&quot;: &quot;Run&quot;,
+     &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+@@ -125,8 +115,8 @@
+   <component name="SharedIndexes">
+     <attachedChunks>
+       <set>
+-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145" />
+-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145" />
++        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
++        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+       </set>
+     </attachedChunks>
+   </component>
+@@ -149,11 +139,10 @@
+       <workItem from="1743027967471" duration="2988000" />
+       <workItem from="1743360184445" duration="944000" />
+       <workItem from="1743367188864" duration="2331000" />
+-      <workItem from="1743450758146" duration="4583000" />
+-      <workItem from="1745402876602" duration="1501000" />
+-      <workItem from="1745571595474" duration="9601000" />
+-      <workItem from="1745610350200" duration="1702000" />
+-      <workItem from="1745662144201" duration="1396000" />
++      <workItem from="1743450758146" duration="4781000" />
++      <workItem from="1743871396653" duration="3088000" />
++      <workItem from="1744092646551" duration="609000" />
++      <workItem from="1744222448706" duration="2292000" />
+     </task>
+     <task id="LOCAL-00001" summary="Connected database">
+       <option name="closed" value="true" />
+@@ -163,13 +152,13 @@
+       <option name="project" value="LOCAL" />
+       <updated>1742937054630</updated>
+     </task>
+-    <task id="LOCAL-00002" summary="LOTS AND LOTS">
++    <task id="LOCAL-00002" summary="Implemented TransactionController,Service,Dto,Repository">
+       <option name="closed" value="true" />
+-      <created>1745613608272</created>
++      <created>1743455526906</created>
+       <option name="number" value="00002" />
+       <option name="presentableId" value="LOCAL-00002" />
+       <option name="project" value="LOCAL" />
+-      <updated>1745613608272</updated>
++      <updated>1743455526906</updated>
+     </task>
+     <option name="localTasksCounter" value="3" />
+     <servers />
+@@ -179,8 +168,8 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="Connected database" />
+-    <MESSAGE value="LOTS AND LOTS" />
+-    <option name="LAST_COMMIT_MESSAGE" value="LOTS AND LOTS" />
++    <MESSAGE value="Implemented TransactionController,Service,Dto,Repository" />
++    <option name="LAST_COMMIT_MESSAGE" value="Implemented TransactionController,Service,Dto,Repository" />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />
