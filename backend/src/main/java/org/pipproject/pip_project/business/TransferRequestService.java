@@ -8,6 +8,7 @@ import org.pipproject.pip_project.model.User;
 import org.pipproject.pip_project.repositories.AccountRepository;
 import org.pipproject.pip_project.repositories.TransferRequestRepository;
 import org.pipproject.pip_project.repositories.UserRepository;
+import org.pipproject.pip_project.validators.TransferRequestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,11 +33,14 @@ public class TransferRequestService {
         this.transactionService = transactionService;
     }
 
-    public TransferRequest createRequest(String requesterEmail, String recipientEmail,double amount, String description){
+    public TransferRequest createRequest(String requesterEmail, String recipientEmail,double amount, String description, long sourceAccountId){
         User requester = userRepository.findByEmail(requesterEmail).orElseThrow(()->new RuntimeException("Requester not found"));
         User recipient = userRepository.findByEmail(recipientEmail).orElseThrow(()->new RuntimeException("Recipient not found"));
+        Account sourceAccount = accountRepository.findById(sourceAccountId).orElseThrow(()->new RuntimeException("Source account not found"));
 
-        TransferRequest request = new TransferRequest(amount,description,new Date(), TransferStatus.WAITING,requester,recipient);
+        TransferRequestValidator.validate(requesterEmail,recipientEmail,amount,description,sourceAccountId);
+
+        TransferRequest request = new TransferRequest(amount,description,new Date(), TransferStatus.WAITING,requester,recipient,sourceAccount);
         return transferRequestRepository.save(request);
     }
 
@@ -45,7 +49,7 @@ public class TransferRequestService {
     }
 
     public List<TransferRequest> getSentRequests(String requesterEmail) {
-        return transferRequestRepository.findByRequesterEmail(requesterEmail);
+        return transferRequestRepository.findByRequesterEmailOrderByDateDesc(requesterEmail);
     }
 
     public TransferRequest acceptRequest(long requestId, TransferRequestDTO transferRequestDTO) {

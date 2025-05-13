@@ -1028,7 +1028,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Charset>utf8mb4</Charset>
     </collation>
     <schema id="288" parent="1" name="defaultdb">
-      <LastIntrospectionLocalTimestamp>2025-05-12.19:52:24</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-05-13.12:51:07</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="289" parent="1" name="information_schema">
@@ -1274,58 +1274,71 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>7</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <foreign-key id="345" parent="304" name="FKn0vn0wm9t6gvqv6jgf83r91d4">
+    <column id="345" parent="304" name="source_account_id">
+      <Position>8</Position>
+      <StoredType>bigint|0s</StoredType>
+    </column>
+    <foreign-key id="346" parent="304" name="FKn0vn0wm9t6gvqv6jgf83r91d4">
       <ColNames>recipient_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <foreign-key id="346" parent="304" name="FKqnd8iqt49l3uxrw315icmpbtw">
+    <foreign-key id="347" parent="304" name="FKqnd8iqt49l3uxrw315icmpbtw">
       <ColNames>requester_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <index id="347" parent="304" name="PRIMARY">
+    <foreign-key id="348" parent="304" name="FK7gpqbwpvsos7jqhlqm4iqv0qy">
+      <ColNames>source_account_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>account</RefTableName>
+    </foreign-key>
+    <index id="349" parent="304" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="348" parent="304" name="FKn0vn0wm9t6gvqv6jgf83r91d4">
+    <index id="350" parent="304" name="FKn0vn0wm9t6gvqv6jgf83r91d4">
       <ColNames>recipient_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="349" parent="304" name="FKqnd8iqt49l3uxrw315icmpbtw">
+    <index id="351" parent="304" name="FKqnd8iqt49l3uxrw315icmpbtw">
       <ColNames>requester_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="350" parent="304" name="PRIMARY">
+    <index id="352" parent="304" name="FK7gpqbwpvsos7jqhlqm4iqv0qy">
+      <ColNames>source_account_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="353" parent="304" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="351" parent="305" name="id">
+    <column id="354" parent="305" name="id">
       <AutoIncrement>5</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="352" parent="305" name="email">
+    <column id="355" parent="305" name="email">
       <Position>2</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <column id="353" parent="305" name="password">
+    <column id="356" parent="305" name="password">
       <Position>3</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <column id="354" parent="305" name="username">
+    <column id="357" parent="305" name="username">
       <Position>4</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <index id="355" parent="305" name="PRIMARY">
+    <index id="358" parent="305" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="356" parent="305" name="PRIMARY">
+    <key id="359" parent="305" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

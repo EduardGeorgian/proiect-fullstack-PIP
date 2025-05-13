@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TransferRequestRepository extends JpaRepository<TransferRequest, Long> {
     List<TransferRequest> findByRecipientEmail(String recipientEmail);
-    List<TransferRequest> findByRequesterEmail(String requesterEmail);
+    List<TransferRequest> findByRequesterEmailOrderByDateDesc(String requesterEmail);
 }

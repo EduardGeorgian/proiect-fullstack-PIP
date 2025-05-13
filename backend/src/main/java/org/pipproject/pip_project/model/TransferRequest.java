@@ -36,13 +36,20 @@ public class TransferRequest {
     @JoinColumn(name = "recipient_id")
     private User recipient;
 
-    public TransferRequest(double amount, String description, Date date, TransferStatus status, User requester, User recipient) {
+    @ManyToOne
+    @JoinColumn(name = "source_account_id")
+    private Account sourceAccount;
+
+
+
+    public TransferRequest(double amount, String description, Date date, TransferStatus status, User requester, User recipient, Account sourceAccount) {
         this.amount = amount;
         this.description = description;
         this.date = date;
         this.status = status;
         this.requester = requester;
         this.recipient = recipient;
+        this.sourceAccount = sourceAccount;
     }
 
 }

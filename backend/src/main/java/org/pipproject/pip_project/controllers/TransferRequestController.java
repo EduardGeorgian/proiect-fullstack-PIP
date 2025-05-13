@@ -27,7 +27,7 @@ public class TransferRequestController {
     @PostMapping("/add")
     public ResponseEntity<?> addTransferRequest(@RequestBody TransferRequestDTO transferRequestDTO) {
         try{
-           TransferRequest request = transferRequestService.createRequest(transferRequestDTO.getRequesterEmail(), transferRequestDTO.getRecipientEmail(),transferRequestDTO.getAmount(),transferRequestDTO.getDescription());
+           TransferRequest request = transferRequestService.createRequest(transferRequestDTO.getRequesterEmail(), transferRequestDTO.getRecipientEmail(),transferRequestDTO.getAmount(),transferRequestDTO.getDescription(),transferRequestDTO.getSourceAccountId());
             return ResponseEntity.status(HttpStatus.CREATED).body(request);
         }catch(Exception e){
             Map<String,String> error = new HashMap<>();
