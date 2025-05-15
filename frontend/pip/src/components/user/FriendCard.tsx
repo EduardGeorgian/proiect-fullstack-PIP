@@ -1,16 +1,29 @@
 import { Card, CardContent } from "../ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
 
 interface Props {
   username: string;
-  email: string;
+  hasPendingRequests?: boolean;
+  hasReceivedPendingRequests?: boolean;
+  onViewRequestsClick?: () => void;
+  onViewReceivedRequestsClick?: () => void;
   onSendClick?: () => void;
+  onRequestClick?: () => void;
 }
 
-export default function FriendCard({ username, email, onSendClick }: Props) {
+export default function FriendCard({
+  username,
+  hasPendingRequests = false,
+  hasReceivedPendingRequests = false,
+  onViewRequestsClick,
+  onViewReceivedRequestsClick,
+  onSendClick,
+  onRequestClick,
+}: Props) {
   return (
-    <Card className="flex flex-row  justify-between items-start  gap-4 p-4 relative ">
+    <Card className="flex flex-row justify-between items-start gap-4 p-4 relative">
       <CardContent className="flex flex-row gap-4 items-start">
         <Avatar className="h-16 w-16">
           <AvatarImage src="./assets/images/react.svg" alt={username} />
@@ -18,25 +31,48 @@ export default function FriendCard({ username, email, onSendClick }: Props) {
             {username.charAt(0).toUpperCase()}
           </AvatarFallback>
         </Avatar>
-        <CardContent className="flex flex-col justify-center items-start">
-          <h2 className="text-lg font-semibold">{username}</h2>
-          <p className="text-sm text-gray-500">{email}</p>
-        </CardContent>
-
         <CardContent className="flex flex-row gap-5 items-center">
-          <Button
-            variant="outline"
-            className="size-sm cursor-pointer bg-gray-200 hover:bg-green-300"
-            onClick={onSendClick}
-          >
-            Send
-          </Button>
-          <Button
-            variant="outline"
-            className="size-sm cursor-pointer bg-gray-200 hover:bg-green-300"
-          >
-            Request
-          </Button>
+          <div className="relative">
+            <Button
+              variant="outline"
+              className="size-sm cursor-pointer bg-gray-200 hover:bg-green-300"
+              onClick={onSendClick}
+            >
+              Send
+            </Button>
+            {hasReceivedPendingRequests && (
+              <Badge
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onViewReceivedRequestsClick?.();
+                }}
+                className="absolute -top-2 -right-2 text-xs bg-red-500 text-white px-2 py-0.5 rounded-full cursor-pointer hover:bg-red-600"
+              >
+                !
+              </Badge>
+            )}
+          </div>
+
+          <div className="relative">
+            <Button
+              variant="outline"
+              className="size-sm cursor-pointer bg-gray-200 hover:bg-green-300"
+              onClick={onRequestClick}
+            >
+              Request
+            </Button>
+            {hasPendingRequests && (
+              <Badge
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onViewRequestsClick?.();
+                }}
+                className="absolute -top-2 -right-2 text-xs bg-red-500 text-white px-2 py-0.5 rounded-full cursor-pointer hover:bg-red-600"
+              >
+                !
+              </Badge>
+            )}
+          </div>
         </CardContent>
       </CardContent>
       <CardContent className="flex flex-row gap-5 items-center">

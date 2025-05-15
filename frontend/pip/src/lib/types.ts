@@ -20,3 +20,29 @@ export interface Transaction {
   destinationAccount: Account | null;
   status: string;
 }
+
+export interface TransferRequest {
+  id: number;
+  amount: number;
+  description: string;
+  date: string;
+  status: string;
+  currency: string;
+  recipient: {
+    email: string;
+  };
+  requester: {
+    email: string;
+  };
+  sourceAccount: {
+    id: number;
+  };
+}
+
+export interface TransferRequestDTO {
+  amount: number;
+  description: string;
+  requesterEmail: string;
+  recipientEmail: string;
+  sourceAccountId: number | null;
+}

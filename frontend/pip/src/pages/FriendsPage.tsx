@@ -5,9 +5,22 @@ import { User } from "@/lib/types";
 import { getUserDashboard, getUserFriends } from "@/services/userService";
 import { useEffect, useState } from "react";
 import SendMoneyDialog from "@/components/user/SendMoneyDialog";
-import { sendTransaction } from "@/services/transactionService";
+import {
+  acceptTransferRequest,
+  deleteTransferRequest,
+  getReceivedTransactionRequests,
+  getSentTransactionRequests,
+  rejectTransferRequest,
+  sendTransaction,
+} from "@/services/transactionService";
 import { toast } from "sonner";
 import { CheckCircle, XCircle } from "lucide-react";
+import RequestMoneyDialog from "@/components/user/RequestMoneyDialog";
+import { requestTransaction } from "@/services/transactionService";
+import RequestListDialog from "@/components/user/RequestListDialog";
+import { TransferRequest } from "@/lib/types";
+import TransferRequestsDialog from "@/components/user/TransferRequestsDialog";
+import { mapToTransferRequestDTO } from "@/utils/mappingTransferRequestToDTO";
 
 export default function FriendsPage() {
   const [user, setUser] = useState<User | null>(null);
@@ -17,6 +30,26 @@ export default function FriendsPage() {
   const [accounts, setAccounts] = useState([]);
   const [friendAccounts, setFriendAccounts] = useState([]);
   const [transferBalance, setTransferBalance] = useState<string | null>(null);
+  const [showRequestDialog, setShowRequestDialog] = useState(false);
+  const [pendingMap, setPendingMap] = useState<Record<string, boolean>>({});
+  const [showRequestListDialog, setShowRequestListDialog] = useState(false);
+  const [showReceivedRequestListDialog, setShowReceivedRequestListDialog] =
+    useState(false);
+  const [requestsForFriend, setRequestsForFriend] = useState<TransferRequest[]>(
+    []
+  );
+  const [requestsReceivedFromFriend, setRequestsReceivedFromFriend] = useState<
+    TransferRequest[]
+  >([]);
+  const [selectedRequestFriendName, setSelectedRequestFriendName] =
+    useState<string>("");
+  const [sentRequests, setSentRequests] = useState<TransferRequest[]>([]);
+  const [receivedRequests, setReceivedRequests] = useState<TransferRequest[]>(
+    []
+  );
+  const [receivedPendingMap, setReceivedPendingMap] = useState<
+    Record<string, boolean>
+  >({});
 
   // Load user from localStorage and fetch friends
   useEffect(() => {
@@ -29,14 +62,56 @@ export default function FriendsPage() {
     const fetchFriends = async () => {
       try {
         const res = await getUserFriends(parsedUser.id);
-        setFriends(res.data);
+        const friendList = res.data;
+        setFriends(friendList);
+
+        const sentRes = await getSentTransactionRequests(parsedUser.email);
+        const receivedRes = await getReceivedTransactionRequests(
+          parsedUser.email
+        );
+        const sentPendingRequests = sentRes.data.filter(
+          (r: any) => r.status === "WAITING"
+        );
+
+        const receivedPendingRequests = receivedRes.data.filter(
+          (r: any) => r.status === "WAITING"
+        );
+
+        sentPendingRequests.forEach((req: any) => {
+          req.currency = transferBalance;
+        });
+
+        receivedPendingRequests.forEach((req: any) => {
+          req.currency = transferBalance;
+        });
+
+        setSentRequests(sentPendingRequests);
+        setReceivedRequests(receivedPendingRequests);
+        const map: Record<string, boolean> = {};
+        const map2: Record<string, boolean> = {};
+        for (const friend of friendList) {
+          map[friend.email] = sentPendingRequests.some(
+            (req: any) =>
+              req.recipient?.email?.trim().toLowerCase() ===
+              friend.email?.trim().toLowerCase()
+          );
+        }
+
+        for (const friend of friendList) {
+          map2[friend.email] = receivedPendingRequests.some(
+            (req: any) =>
+              req.requester?.email?.trim().toLowerCase() ===
+              friend.email?.trim().toLowerCase()
+          );
+        }
+        setPendingMap(map);
+        setReceivedPendingMap(map2);
       } catch (err) {
-        console.error("Failed to fetch friends:", err);
+        console.error("Failed to fetch friends or pending requests:", err);
       } finally {
         setLoading(false);
       }
     };
-
     fetchFriends();
   }, []);
 
@@ -110,6 +185,140 @@ export default function FriendsPage() {
     }
   };
 
+  const handleRequestMoney = async (
+    amount: number,
+    description: string,
+    sourceAccountId: number
+  ) => {
+    if (!selectedFriend || !user?.email || !selectedFriend.email) return;
+
+    try {
+      const res = await requestTransaction({
+        amount,
+        description,
+        requesterEmail: user.email,
+        recipientEmail: selectedFriend.email,
+        sourceAccountId,
+      });
+      setSentRequests((prev) => [...prev, res.data]);
+
+      const recipientEmail = res.data.recipient?.email?.toLowerCase();
+      if (recipientEmail) {
+        setPendingMap((prev) => ({
+          ...prev,
+          [recipientEmail]: true,
+        }));
+      }
+
+      toast.success(`Request sent to ${selectedFriend.username}`, {
+        icon: <CheckCircle className="text-green-500" />,
+      });
+
+      setSelectedFriend(null);
+      setShowRequestDialog(false);
+    } catch (err) {
+      console.error("Request failed:", err);
+      toast.error("Failed to send request.", {
+        icon: <XCircle className="text-red-500" />,
+      });
+    }
+  };
+
+  const handleViewRequests = (friend: User) => {
+    if (!user?.email || !friend?.email) return;
+
+    const requests = sentRequests.filter(
+      (r: TransferRequest) =>
+        r.recipient?.email?.trim().toLowerCase() ===
+          friend.email?.trim().toLowerCase() && r.status === "WAITING"
+    );
+
+    setRequestsForFriend(requests);
+    setSelectedRequestFriendName(friend.username);
+    setShowRequestListDialog(true);
+  };
+
+  const handleViewReceivedRequests = (friend: User) => {
+    if (!user?.email || !friend?.email) return;
+    const requests = receivedRequests.filter(
+      (r: TransferRequest) =>
+        r.requester?.email?.trim().toLowerCase() ===
+          friend.email?.trim().toLowerCase() && r.status === "WAITING"
+    );
+    setRequestsReceivedFromFriend(requests);
+    setSelectedRequestFriendName(friend.username);
+    setShowReceivedRequestListDialog(true);
+  };
+
+  const handleAcceptRequest = async (
+    requestId: number,
+    transferRequestDTO: TransferRequest
+  ) => {
+    if (!user?.email) return;
+
+    try {
+      await acceptTransferRequest(
+        String(requestId),
+        mapToTransferRequestDTO(transferRequestDTO)
+      );
+      setRequestsReceivedFromFriend((prev) =>
+        prev.filter((req) => req.id !== requestId)
+      );
+      toast.success("Request accepted successfully.", {
+        icon: <CheckCircle className="text-green-500" />,
+      });
+    } catch (err) {
+      console.error("Failed to accept request:", err);
+      toast.error("Failed to accept request.", {
+        icon: <XCircle className="text-red-500" />,
+      });
+    }
+  };
+
+  const handleRejectRequest = async (
+    requestId: number,
+    transferRequestDTO: TransferRequest
+  ) => {
+    if (!user?.email) return;
+
+    try {
+      await rejectTransferRequest(
+        String(requestId),
+        mapToTransferRequestDTO(transferRequestDTO)
+      );
+      setRequestsReceivedFromFriend((prev) =>
+        prev.filter((req) => req.id !== requestId)
+      );
+      toast.success("Request rejected successfully.", {
+        icon: <CheckCircle className="text-green-500" />,
+      });
+    } catch (err) {
+      console.error("Failed to reject request:", err);
+      toast.error("Failed to reject request.", {
+        icon: <XCircle className="text-red-500" />,
+      });
+    }
+  };
+
+  const handleDeleteRequest = async (requestId: number) => {
+    if (!user?.email) return;
+
+    try {
+      await deleteTransferRequest(String(requestId));
+      setRequestsForFriend((prev) =>
+        prev.filter((req) => req.id !== requestId)
+      );
+      toast.success("Request deleted successfully.", {
+        icon: <CheckCircle className="text-green-500" />,
+      });
+    } catch (err) {
+      console.error("Failed to delete request:", err);
+      toast.error("Failed to delete request.", {
+        icon: <XCircle className="text-red-500" />,
+      });
+    }
+  };
+
   if (!user) return <div>Se încarcă...</div>;
 
   return (
@@ -128,8 +337,17 @@ export default function FriendsPage() {
           >
             <FriendCard
               username={friend.username}
-              email={friend.email}
               onSendClick={() => setSelectedFriend(friend)}
+              onRequestClick={() => {
+                setSelectedFriend(friend);
+                setShowRequestDialog(true);
+              }}
+              onViewRequestsClick={() => handleViewRequests(friend)}
+              onViewReceivedRequestsClick={() =>
+                handleViewReceivedRequests(friend)
+              }
+              hasPendingRequests={!!pendingMap[friend.email]}
+              hasReceivedPendingRequests={!!receivedPendingMap[friend.email]}
             />
           </div>
         ))
@@ -145,6 +363,50 @@ export default function FriendsPage() {
           recipientName={selectedFriend.username}
           userAccounts={accounts}
           friendAccounts={friendAccounts}
+        />
+      )}
+
+      {selectedFriend && showRequestDialog && !showRequestListDialog && (
+        <RequestMoneyDialog
+          open={showRequestDialog}
+          onClose={() => {
+            setShowRequestDialog(false);
+            setSelectedFriend(null);
+          }}
+          onRequest={handleRequestMoney}
+          recipientName={selectedFriend.username}
+          userAccounts={accounts}
+        />
+      )}
+
+      {showRequestListDialog && (
+        <RequestListDialog
+          open={showRequestListDialog}
+          onClose={() => setShowRequestListDialog(false)}
+          friendName={selectedRequestFriendName}
+          requests={requestsForFriend}
+          currency={transferBalance || ""}
+          onCancel={(id) => handleDeleteRequest(id)}
+        />
+      )}
+
+      {showReceivedRequestListDialog && (
+        <TransferRequestsDialog
+          open={showReceivedRequestListDialog}
+          onClose={() => setShowReceivedRequestListDialog(false)}
+          friendName={selectedRequestFriendName}
+          requests={requestsReceivedFromFriend}
+          currency={transferBalance || ""}
+          onAccept={(id) =>
+            handleAcceptRequest(
+              id,
+              requestsReceivedFromFriend.find((r) => r.id === id)!
+            )
+          }
+          onReject={(id) => {
+            const req = requestsReceivedFromFriend.find((r) => r.id === id);
+            if (req) handleRejectRequest(id, req);
+          }}
         />
       )}
     </>
