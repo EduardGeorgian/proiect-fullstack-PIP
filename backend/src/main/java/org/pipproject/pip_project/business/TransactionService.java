@@ -4,9 +4,11 @@ package org.pipproject.pip_project.business;
 import jakarta.transaction.Transactional;
 import org.pipproject.pip_project.model.*;
 import org.pipproject.pip_project.repositories.AccountRepository;
+import org.pipproject.pip_project.repositories.FriendsRepository;
 import org.pipproject.pip_project.repositories.TransactionRepository;
 import org.pipproject.pip_project.repositories.UserRepository;
 import org.pipproject.pip_project.validators.TransactionValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -17,11 +19,14 @@ public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final AccountRepository accountRepository;
     private final UserRepository userRepository;
+    private final FriendsRepository friendsRepository;
 
-    public TransactionService(TransactionRepository transactionRepository, AccountRepository accountRepository, UserRepository userRepository) {
+    @Autowired
+    public TransactionService(TransactionRepository transactionRepository, AccountRepository accountRepository, UserRepository userRepository, FriendsRepository friendsRepository) {
         this.transactionRepository = transactionRepository;
         this.accountRepository = accountRepository;
         this.userRepository = userRepository;
+        this.friendsRepository = friendsRepository;
     }
 
     @Transactional
@@ -50,7 +55,7 @@ public class TransactionService {
 
     @Transactional
     public Transaction addDeposit(String initiatorEmail, double amount, Account destinationAccount) {
-        TransactionValidator.validate(TransactionType.DEPOSIT, amount, destinationAccount, null);
+        TransactionValidator.validate(TransactionType.DEPOSIT, amount,null, destinationAccount);
 
         destinationAccount.setBalance(destinationAccount.getBalance() + amount);
         accountRepository.save(destinationAccount);
@@ -58,6 +63,7 @@ public class TransactionService {
         Transaction transaction = new Transaction(initiatorEmail, TransactionType.DEPOSIT, new Date(), amount, destinationAccount, null, TransactionStatus.COMPLETED);
         return transactionRepository.save(transaction);
     }
+
 
     public List<Transaction> getAllTransactions(String initiatorEmail) throws Exception {
         Optional<User> userOpt = userRepository.findByEmail(initiatorEmail);
@@ -79,5 +85,34 @@ public class TransactionService {
         return all;
     }
 
+    @Transactional
+    public void deleteCompletedOrFailedTransactionsForUser(String initiatorEmail) throws Exception {
+        Optional<User> userOpt = userRepository.findByEmail(initiatorEmail);
+        if (userOpt.isEmpty()) {
+            throw new Exception("User not found");
+        }
+        User user = userOpt.get();
+
+        List<Transaction> initiated = transactionRepository.findByInitiatorEmailOrderByDateDesc(initiatorEmail);
+
+        List<Account> userAccounts = accountRepository.findByUserId(user.getId());
+        List<Transaction> received = new ArrayList<>();
+        for (Account account : userAccounts) {
+            List<Transaction> accountTransactions = transactionRepository.findByDestinationAccountIdOrderByDateDesc(account.getId());
+            if (accountTransactions != null) {
+                received.addAll(accountTransactions);
+            }
+        }
+
+        Set<Transaction> allTransactions = new HashSet<>();
+        if (initiated != null) allTransactions.addAll(initiated);
+        allTransactions.addAll(received);
+
+        for (Transaction tx : allTransactions) {
+            if (tx.getStatus() == TransactionStatus.COMPLETED || tx.getStatus() == TransactionStatus.FAILED) {
+                transactionRepository.delete(tx);
+            }
+        }
+    }
 
 }

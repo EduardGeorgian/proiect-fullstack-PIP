@@ -21,6 +21,11 @@ public class TransactionValidator {
                 throw new IllegalArgumentException("Destination account cannot be null");
         }
 
+        if(type == TransactionType.REQUEST){
+            if(sourceAccount == null || destinationAccount == null)
+                throw new IllegalArgumentException("Source account and destination account cannot be null");
+        }
+
         if (type == TransactionType.TRANSFER && sourceAccount.getId() == destinationAccount.getId()) {
             throw new IllegalArgumentException("Source and destination accounts must be different for transfers");
         }

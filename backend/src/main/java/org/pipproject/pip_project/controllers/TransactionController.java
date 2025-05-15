@@ -110,4 +110,17 @@ public class TransactionController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
+
+    @DeleteMapping("/clear")
+    public ResponseEntity<?> deleteUserTransactions(@RequestParam String initiatorEmail) {
+        try {
+            transactionService.deleteCompletedOrFailedTransactionsForUser(initiatorEmail);
+            return ResponseEntity.ok("User's completed and failed transactions deleted.");
+        } catch (Exception e) {
+            Map<String,String> response = new HashMap<>();
+            response.put("error",e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
 }
