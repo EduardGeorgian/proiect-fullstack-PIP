@@ -3,8 +3,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Transaction } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
-import { getTransactionsByUserEmail } from "@/services/transactionService";
+import {
+  clearCompletedOrFailedTransactions,
+  getTransactionsByUserEmail,
+} from "@/services/transactionService";
 import UserProfileCard from "@/components/user/UserProfileCard";
+import { toast } from "sonner";
+import ClearTransactionsDialog from "@/components/user/ClearTransactionsDialog";
 
 export default function TransactionsPage() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -37,13 +42,44 @@ export default function TransactionsPage() {
     fetchTransactions();
   }, []);
 
+  const handleClear = async () => {
+    if (!user) return;
+
+    const confirm = window.confirm(
+      "Are you sure you want to clear completed or failed transactions?"
+    );
+    if (!confirm) return;
+
+    try {
+      await clearCompletedOrFailedTransactions(user.email);
+      const res = await getTransactionsByUserEmail(user.email);
+      setTransactions(res.data);
+    } catch (err) {
+      console.error("Failed to clear transactions:", err);
+    }
+  };
+
   if (loading) return <Skeleton className="w-full h-32" />;
   if (!user) return <p>Utilizator inexistent.</p>;
 
   return (
     <>
       <UserProfileCard username={user.username} email={user.email} />
-      <h2 className="text-2xl font-bold mt-4">Transactions</h2>
+
+      <div className="flex justify-between items-center mt-4 mb-2">
+        <h2 className="text-2xl font-bold">Transactions</h2>
+        <ClearTransactionsDialog
+          userEmail={user.email}
+          onSuccess={() => {
+            setTransactions((prev) =>
+              prev.filter(
+                (tx) => tx.status !== "COMPLETED" && tx.status !== "FAILED"
+              )
+            );
+            toast.success("Transactions cleared successfully.", { icon: "✅" });
+          }}
+        />
+      </div>
 
       {transactions.length > 0 ? (
         transactions.map((tx) => (

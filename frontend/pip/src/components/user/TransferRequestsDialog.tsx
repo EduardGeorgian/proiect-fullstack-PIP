@@ -2,23 +2,25 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { ScrollArea } from "../ui/scroll-area";
 import { TransferRequest } from "@/lib/types";
 
-interface RequestListProps {
+interface TransferRequestsDialogProps {
   open: boolean;
   onClose: () => void;
   requests: TransferRequest[];
   friendName: string;
   currency: string;
-  onCancel: (requestId: number) => void;
+  onAccept: (requestId: number) => void;
+  onReject: (requestId: number) => void;
 }
 
-export default function RequestListDialog({
+export default function TransferRequestsDialog({
   open,
   onClose,
   requests,
   friendName,
-  onCancel,
   currency,
-}: RequestListProps) {
+  onAccept,
+  onReject,
+}: TransferRequestsDialogProps) {
   console.log("Requests for dialog:", requests);
 
   return (
@@ -26,7 +28,7 @@ export default function RequestListDialog({
       <DialogContent className="backdrop-blur-sm">
         <DialogHeader>
           <DialogTitle className="text-lg">
-            Requests to {friendName}
+            Requests from {friendName}
           </DialogTitle>
         </DialogHeader>
         <ScrollArea className="h-64 w-full">
@@ -63,15 +65,22 @@ export default function RequestListDialog({
                     day: "2-digit",
                     hour: "2-digit",
                     minute: "2-digit",
-                    hour12: false,
+                    second: "2-digit",
                   })}
                 </p>
-                <div className="flex justify-end space-x-2 mt-2">
+
+                <div className="flex space-x-4 mt-2">
                   <button
-                    onClick={() => onCancel(req.id)}
-                    className="bg-yellow-300 text-black px-4 py-2 rounded"
+                    onClick={() => onAccept(req.id)}
+                    className="bg-green-500 text-white px-4 py-2 rounded"
                   >
-                    Delete
+                    Accept
+                  </button>
+                  <button
+                    onClick={() => onReject(req.id)}
+                    className="bg-red-500 text-white px-4 py-2 rounded"
+                  >
+                    Reject
                   </button>
                 </div>
               </div>

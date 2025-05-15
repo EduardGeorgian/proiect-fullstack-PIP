@@ -34,4 +34,15 @@ export interface TransferRequest {
   requester: {
     email: string;
   };
+  sourceAccount: {
+    id: number;
+  };
+}
+
+export interface TransferRequestDTO {
+  amount: number;
+  description: string;
+  requesterEmail: string;
+  recipientEmail: string;
+  sourceAccountId: number | null;
 }

@@ -5,19 +5,22 @@ import { Badge } from "../ui/badge";
 
 interface Props {
   username: string;
-  email: string;
+  hasPendingRequests?: boolean;
+  hasReceivedPendingRequests?: boolean;
+  onViewRequestsClick?: () => void;
+  onViewReceivedRequestsClick?: () => void;
   onSendClick?: () => void;
   onRequestClick?: () => void;
-  onViewRequestsClick?: () => void;
-  hasPendingRequests?: boolean;
 }
 
 export default function FriendCard({
   username,
+  hasPendingRequests = false,
+  hasReceivedPendingRequests = false,
+  onViewRequestsClick,
+  onViewReceivedRequestsClick,
   onSendClick,
   onRequestClick,
-  onViewRequestsClick,
-  hasPendingRequests = false,
 }: Props) {
   return (
     <Card className="flex flex-row justify-between items-start gap-4 p-4 relative">
@@ -29,13 +32,26 @@ export default function FriendCard({
           </AvatarFallback>
         </Avatar>
         <CardContent className="flex flex-row gap-5 items-center">
-          <Button
-            variant="outline"
-            className="size-sm cursor-pointer bg-gray-200 hover:bg-green-300"
-            onClick={onSendClick}
-          >
-            Send
-          </Button>
+          <div className="relative">
+            <Button
+              variant="outline"
+              className="size-sm cursor-pointer bg-gray-200 hover:bg-green-300"
+              onClick={onSendClick}
+            >
+              Send
+            </Button>
+            {hasReceivedPendingRequests && (
+              <Badge
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onViewReceivedRequestsClick?.();
+                }}
+                className="absolute -top-2 -right-2 text-xs bg-red-500 text-white px-2 py-0.5 rounded-full cursor-pointer hover:bg-red-600"
+              >
+                !
+              </Badge>
+            )}
+          </div>
 
           <div className="relative">
             <Button
@@ -45,7 +61,6 @@ export default function FriendCard({
             >
               Request
             </Button>
-
             {hasPendingRequests && (
               <Badge
                 onClick={(e) => {
