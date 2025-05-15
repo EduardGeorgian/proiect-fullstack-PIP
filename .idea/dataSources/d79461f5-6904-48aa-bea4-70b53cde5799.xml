@@ -1028,9 +1028,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Charset>utf8mb4</Charset>
     </collation>
     <schema id="288" parent="1" name="defaultdb">
-      <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
-      <LastIntrospectionLevel>3</LastIntrospectionLevel>
-      <LastIntrospectionLocalTimestamp>2025-05-05.09:33:45</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-05-13.12:51:07</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="289" parent="1" name="information_schema">
@@ -1080,195 +1078,267 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Plugin>caching_sha2_password</Plugin>
     </user>
     <table id="301" parent="288" name="account">
-      <DetailsLevel>3</DetailsLevel>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
     <table id="302" parent="288" name="friends">
-      <DetailsLevel>3</DetailsLevel>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
     <table id="303" parent="288" name="transaction">
-      <DetailsLevel>3</DetailsLevel>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="304" parent="288" name="user">
-      <DetailsLevel>3</DetailsLevel>
+    <table id="304" parent="288" name="transfer_request">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="305" parent="301" name="id">
-      <AutoIncrement>3</AutoIncrement>
+    <table id="305" parent="288" name="user">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <column id="306" parent="301" name="id">
+      <AutoIncrement>4</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="306" parent="301" name="balance">
+    <column id="307" parent="301" name="balance">
       <Position>2</Position>
       <StoredType>double|0s</StoredType>
     </column>
-    <column id="307" parent="301" name="currency">
+    <column id="308" parent="301" name="currency">
       <Position>3</Position>
       <StoredType>enum(&apos;EUR&apos;, &apos;RON&apos;, &apos;USD&apos;)|0e</StoredType>
     </column>
-    <column id="308" parent="301" name="user_id">
+    <column id="309" parent="301" name="user_id">
       <Position>4</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <foreign-key id="309" parent="301" name="FK7m8ru44m93ukyb61dfxw0apf6">
+    <foreign-key id="310" parent="301" name="FK7m8ru44m93ukyb61dfxw0apf6">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <index id="310" parent="301" name="PRIMARY">
+    <index id="311" parent="301" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="311" parent="301" name="FK7m8ru44m93ukyb61dfxw0apf6">
+    <index id="312" parent="301" name="FK7m8ru44m93ukyb61dfxw0apf6">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="312" parent="301" name="PRIMARY">
+    <key id="313" parent="301" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="313" parent="302" name="id">
-      <AutoIncrement>3</AutoIncrement>
+    <column id="314" parent="302" name="id">
+      <AutoIncrement>4</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="314" parent="302" name="friend_id">
+    <column id="315" parent="302" name="friend_id">
       <Position>2</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="315" parent="302" name="user_id">
+    <column id="316" parent="302" name="user_id">
       <Position>3</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="316" parent="302" name="status">
+    <column id="317" parent="302" name="status">
       <Position>4</Position>
       <StoredType>enum(&apos;ACCEPTED&apos;, &apos;PENDING&apos;, &apos;REJECTED&apos;)|0e</StoredType>
     </column>
-    <foreign-key id="317" parent="302" name="FKqhlqyd2eb3nmk9hvrfqslw918">
+    <foreign-key id="318" parent="302" name="FKqhlqyd2eb3nmk9hvrfqslw918">
       <ColNames>friend_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <foreign-key id="318" parent="302" name="FKivlhvh7odettdl818ml67apb9">
+    <foreign-key id="319" parent="302" name="FKivlhvh7odettdl818ml67apb9">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <index id="319" parent="302" name="PRIMARY">
+    <index id="320" parent="302" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="320" parent="302" name="FKqhlqyd2eb3nmk9hvrfqslw918">
+    <index id="321" parent="302" name="FKqhlqyd2eb3nmk9hvrfqslw918">
       <ColNames>friend_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="321" parent="302" name="FKivlhvh7odettdl818ml67apb9">
+    <index id="322" parent="302" name="FKivlhvh7odettdl818ml67apb9">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="322" parent="302" name="PRIMARY">
+    <key id="323" parent="302" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="323" parent="303" name="id">
-      <AutoIncrement>11</AutoIncrement>
+    <column id="324" parent="303" name="id">
+      <AutoIncrement>23</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="324" parent="303" name="amount">
+    <column id="325" parent="303" name="amount">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>double|0s</StoredType>
     </column>
-    <column id="325" parent="303" name="date">
+    <column id="326" parent="303" name="date">
       <Position>3</Position>
       <StoredType>datetime(6)|0s</StoredType>
     </column>
-    <column id="326" parent="303" name="status">
+    <column id="327" parent="303" name="status">
       <Position>4</Position>
       <StoredType>enum(&apos;COMPLETED&apos;, &apos;FAILED&apos;, &apos;PENDING&apos;)|0e</StoredType>
     </column>
-    <column id="327" parent="303" name="type">
+    <column id="328" parent="303" name="type">
       <Position>5</Position>
       <StoredType>enum(&apos;DEPOSIT&apos;, &apos;TRANSFER&apos;, &apos;WITHDRAWAL&apos;)|0e</StoredType>
     </column>
-    <column id="328" parent="303" name="destination_account_id">
+    <column id="329" parent="303" name="destination_account_id">
       <Position>6</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="329" parent="303" name="source_account_id">
+    <column id="330" parent="303" name="source_account_id">
       <Position>7</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="330" parent="303" name="initiator_email">
+    <column id="331" parent="303" name="initiator_email">
       <Position>8</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <foreign-key id="331" parent="303" name="FKan2cq79w1pqavplm9nbu5aef0">
+    <foreign-key id="332" parent="303" name="FKan2cq79w1pqavplm9nbu5aef0">
       <ColNames>destination_account_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>account</RefTableName>
     </foreign-key>
-    <foreign-key id="332" parent="303" name="FK25e716ukpqahttjt6c487lrer">
+    <foreign-key id="333" parent="303" name="FK25e716ukpqahttjt6c487lrer">
       <ColNames>source_account_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>account</RefTableName>
     </foreign-key>
-    <index id="333" parent="303" name="PRIMARY">
+    <index id="334" parent="303" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="334" parent="303" name="FKan2cq79w1pqavplm9nbu5aef0">
+    <index id="335" parent="303" name="FKan2cq79w1pqavplm9nbu5aef0">
       <ColNames>destination_account_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="335" parent="303" name="FK25e716ukpqahttjt6c487lrer">
+    <index id="336" parent="303" name="FK25e716ukpqahttjt6c487lrer">
       <ColNames>source_account_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="336" parent="303" name="PRIMARY">
+    <key id="337" parent="303" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="337" parent="304" name="id">
+    <column id="338" parent="304" name="id">
+      <AutoIncrement>1</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>bigint|0s</StoredType>
+    </column>
+    <column id="339" parent="304" name="amount">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>double|0s</StoredType>
+    </column>
+    <column id="340" parent="304" name="date">
+      <Position>3</Position>
+      <StoredType>datetime(6)|0s</StoredType>
+    </column>
+    <column id="341" parent="304" name="description">
+      <Position>4</Position>
+      <StoredType>varchar(255)|0s</StoredType>
+    </column>
+    <column id="342" parent="304" name="status">
+      <Position>5</Position>
+      <StoredType>enum(&apos;ACCEPTED&apos;, &apos;REJECTED&apos;, &apos;WAITING&apos;)|0e</StoredType>
+    </column>
+    <column id="343" parent="304" name="recipient_id">
+      <Position>6</Position>
+      <StoredType>bigint|0s</StoredType>
+    </column>
+    <column id="344" parent="304" name="requester_id">
+      <Position>7</Position>
+      <StoredType>bigint|0s</StoredType>
+    </column>
+    <column id="345" parent="304" name="source_account_id">
+      <Position>8</Position>
+      <StoredType>bigint|0s</StoredType>
+    </column>
+    <foreign-key id="346" parent="304" name="FKn0vn0wm9t6gvqv6jgf83r91d4">
+      <ColNames>recipient_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>user</RefTableName>
+    </foreign-key>
+    <foreign-key id="347" parent="304" name="FKqnd8iqt49l3uxrw315icmpbtw">
+      <ColNames>requester_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>user</RefTableName>
+    </foreign-key>
+    <foreign-key id="348" parent="304" name="FK7gpqbwpvsos7jqhlqm4iqv0qy">
+      <ColNames>source_account_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>account</RefTableName>
+    </foreign-key>
+    <index id="349" parent="304" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="350" parent="304" name="FKn0vn0wm9t6gvqv6jgf83r91d4">
+      <ColNames>recipient_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="351" parent="304" name="FKqnd8iqt49l3uxrw315icmpbtw">
+      <ColNames>requester_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="352" parent="304" name="FK7gpqbwpvsos7jqhlqm4iqv0qy">
+      <ColNames>source_account_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="353" parent="304" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="354" parent="305" name="id">
       <AutoIncrement>5</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="338" parent="304" name="email">
+    <column id="355" parent="305" name="email">
       <Position>2</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <column id="339" parent="304" name="password">
+    <column id="356" parent="305" name="password">
       <Position>3</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <column id="340" parent="304" name="username">
+    <column id="357" parent="305" name="username">
       <Position>4</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <index id="341" parent="304" name="PRIMARY">
+    <index id="358" parent="305" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="342" parent="304" name="PRIMARY">
+    <key id="359" parent="305" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
