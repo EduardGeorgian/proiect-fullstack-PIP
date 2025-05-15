@@ -57,19 +57,32 @@ public class TransferRequestService {
         if(request.getStatus() == TransferStatus.ACCEPTED){
             throw new RuntimeException("Request already accepted");
         }
-        User recipient = userRepository.findByEmail(transferRequestDTO.getRecipientEmail()).orElseThrow(()->new RuntimeException("Recipient not found"));
         User requester = userRepository.findByEmail(transferRequestDTO.getRequesterEmail()).orElseThrow(()->new RuntimeException("Requester not found"));
+        User recipient = userRepository.findByEmail(transferRequestDTO.getRecipientEmail()).orElseThrow(()->new RuntimeException("Recipient not found"));
 
-        Account requesterAccount = accountRepository.findFirstByUser(Optional.ofNullable(requester));
-        Account recipientAccount = accountRepository.findById(transferRequestDTO.getSourceAccountId()).orElseThrow(()->new RuntimeException("Source account not found"));
+        Account requesterAccount = accountRepository.findById(transferRequestDTO.getSourceAccountId()).orElseThrow(()->new RuntimeException("Requester account not found"));
+        Account recipientAccount = accountRepository.findFirstByUser(Optional.ofNullable(recipient));
 
         if(recipientAccount.getBalance()<request.getAmount()){
             throw new RuntimeException("Source account balance is lower than request amount");
         }
         request.setStatus(TransferStatus.ACCEPTED);
         transactionService.addTransfer(transferRequestDTO.getRecipientEmail(),transferRequestDTO.getAmount(),recipientAccount,requesterAccount);
-        return request;
+        return transferRequestRepository.save(request);
+
     }
 
+    public TransferRequest rejectRequest(long requestId, TransferRequestDTO transferRequestDTO) {
+        TransferRequest request = transferRequestRepository.findById(requestId).orElseThrow(()->new RuntimeException("Request not found"));
+        if(request.getStatus() == TransferStatus.REJECTED){
+            throw new RuntimeException("Request already rejected");
+        }
+        request.setStatus(TransferStatus.REJECTED);
+        return transferRequestRepository.save(request);
+    }
+
+    public void deleteRequest(long requestId) {
+        transferRequestRepository.deleteById(requestId);
+    }
 
 }

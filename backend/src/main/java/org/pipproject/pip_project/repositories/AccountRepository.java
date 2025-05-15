@@ -17,4 +17,5 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
            "FROM Account a WHERE a.user = :user")
    List<AccountSendTransactionDTO> findAccountSendTransactionDTOByUser(Optional<User> user);
    Account findFirstByUser(Optional<User> user);
+   List<Account> findByUserId(Long id);
 }

@@ -85,5 +85,34 @@ public class TransactionService {
         return all;
     }
 
+    @Transactional
+    public void deleteCompletedOrFailedTransactionsForUser(String initiatorEmail) throws Exception {
+        Optional<User> userOpt = userRepository.findByEmail(initiatorEmail);
+        if (userOpt.isEmpty()) {
+            throw new Exception("User not found");
+        }
+        User user = userOpt.get();
+
+        List<Transaction> initiated = transactionRepository.findByInitiatorEmailOrderByDateDesc(initiatorEmail);
+
+        List<Account> userAccounts = accountRepository.findByUserId(user.getId());
+        List<Transaction> received = new ArrayList<>();
+        for (Account account : userAccounts) {
+            List<Transaction> accountTransactions = transactionRepository.findByDestinationAccountIdOrderByDateDesc(account.getId());
+            if (accountTransactions != null) {
+                received.addAll(accountTransactions);
+            }
+        }
+
+        Set<Transaction> allTransactions = new HashSet<>();
+        if (initiated != null) allTransactions.addAll(initiated);
+        allTransactions.addAll(received);
+
+        for (Transaction tx : allTransactions) {
+            if (tx.getStatus() == TransactionStatus.COMPLETED || tx.getStatus() == TransactionStatus.FAILED) {
+                transactionRepository.delete(tx);
+            }
+        }
+    }
 
 }

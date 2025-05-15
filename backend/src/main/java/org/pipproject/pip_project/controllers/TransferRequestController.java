@@ -71,4 +71,28 @@ public class TransferRequestController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
         }
     }
+
+    @PostMapping("/reject/{requestId}")
+    public ResponseEntity<?> rejectTransferRequest(@PathVariable String requestId, @RequestBody TransferRequestDTO transferRequestDTO) {
+        try{
+            TransferRequest request = transferRequestService.rejectRequest(Long.parseLong(requestId), transferRequestDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(request);
+        }catch(Exception e){
+            Map<String, String> error = new HashMap<>();
+            error.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
+    }
+
+    @PostMapping("/delete/{requestId}")
+    public ResponseEntity<?> deleteTransferRequest(@PathVariable String requestId) {
+        try{
+            transferRequestService.deleteRequest(Long.parseLong(requestId));
+            return ResponseEntity.status(HttpStatus.OK).body("Ok");
+        }catch (Exception e){
+            Map<String, String> error = new HashMap<>();
+            error.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
+    }
 }
