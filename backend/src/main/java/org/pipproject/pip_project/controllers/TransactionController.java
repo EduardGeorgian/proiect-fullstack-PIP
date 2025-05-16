@@ -101,7 +101,7 @@ public class TransactionController {
         try{
             List<Transaction> transactions = transactionService.getAllTransactions(initiatorEmail);
             if (transactions.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No transactions found.");
+                return ResponseEntity.status(HttpStatus.OK).body(transactions);
             }
             return ResponseEntity.status(HttpStatus.OK).body(transactions);
         }catch (Exception e){
