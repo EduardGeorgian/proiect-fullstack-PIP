@@ -31,6 +31,9 @@ export default function FriendCard({
             {username.charAt(0).toUpperCase()}
           </AvatarFallback>
         </Avatar>
+        <div className="flex flex-row gap-2 items-center">
+          <h3 className="text-md font-semibold">{username}</h3>
+        </div>
         <CardContent className="flex flex-row gap-5 items-center">
           <div className="relative">
             <Button

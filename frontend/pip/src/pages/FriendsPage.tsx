@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Skeleton } from "@/components/ui/skeleton";
 import FriendCard from "@/components/user/FriendCard";
 import UserProfileCard from "@/components/user/UserProfileCard";
@@ -31,7 +32,6 @@ export default function FriendsPage() {
   const [friendAccounts, setFriendAccounts] = useState([]);
   const [transferBalance, setTransferBalance] = useState<string | null>(null);
   const [showRequestDialog, setShowRequestDialog] = useState(false);
-  const [pendingMap, setPendingMap] = useState<Record<string, boolean>>({});
   const [showRequestListDialog, setShowRequestListDialog] = useState(false);
   const [showReceivedRequestListDialog, setShowReceivedRequestListDialog] =
     useState(false);
@@ -47,9 +47,6 @@ export default function FriendsPage() {
   const [receivedRequests, setReceivedRequests] = useState<TransferRequest[]>(
     []
   );
-  const [receivedPendingMap, setReceivedPendingMap] = useState<
-    Record<string, boolean>
-  >({});
 
   // Load user from localStorage and fetch friends
   useEffect(() => {
@@ -104,8 +101,6 @@ export default function FriendsPage() {
               friend.email?.trim().toLowerCase()
           );
         }
-        setPendingMap(map);
-        setReceivedPendingMap(map2);
       } catch (err) {
         console.error("Failed to fetch friends or pending requests:", err);
       } finally {
@@ -113,7 +108,7 @@ export default function FriendsPage() {
       }
     };
     fetchFriends();
-  }, []);
+  }, [transferBalance]);
 
   // Fetch account info when selecting a friend
   useEffect(() => {
@@ -202,14 +197,6 @@ export default function FriendsPage() {
       });
       setSentRequests((prev) => [...prev, res.data]);
 
-      const recipientEmail = res.data.recipient?.email?.toLowerCase();
-      if (recipientEmail) {
-        setPendingMap((prev) => ({
-          ...prev,
-          [recipientEmail]: true,
-        }));
-      }
-
       toast.success(`Request sent to ${selectedFriend.username}`, {
         icon: <CheckCircle className="text-green-500" />,
       });
@@ -264,6 +251,9 @@ export default function FriendsPage() {
       setRequestsReceivedFromFriend((prev) =>
         prev.filter((req) => req.id !== requestId)
       );
+
+      setReceivedRequests((prev) => prev.filter((req) => req.id !== requestId));
+
       toast.success("Request accepted successfully.", {
         icon: <CheckCircle className="text-green-500" />,
       });
@@ -289,6 +279,8 @@ export default function FriendsPage() {
       setRequestsReceivedFromFriend((prev) =>
         prev.filter((req) => req.id !== requestId)
       );
+      setReceivedRequests((prev) => prev.filter((req) => req.id !== requestId));
+
       toast.success("Request rejected successfully.", {
         icon: <CheckCircle className="text-green-500" />,
       });
@@ -308,6 +300,7 @@ export default function FriendsPage() {
       setRequestsForFriend((prev) =>
         prev.filter((req) => req.id !== requestId)
       );
+      setSentRequests((prev) => prev.filter((req) => req.id !== requestId));
       toast.success("Request deleted successfully.", {
         icon: <CheckCircle className="text-green-500" />,
       });
@@ -346,8 +339,30 @@ export default function FriendsPage() {
               onViewReceivedRequestsClick={() =>
                 handleViewReceivedRequests(friend)
               }
-              hasPendingRequests={!!pendingMap[friend.email]}
-              hasReceivedPendingRequests={!!receivedPendingMap[friend.email]}
+              hasPendingRequests={sentRequests.some(
+                (req) =>
+                  req.recipient?.email?.trim().toLowerCase() ===
+                    friend.email?.trim().toLowerCase() &&
+                  req.status === "WAITING"
+              )}
+              hasReceivedPendingRequests={receivedRequests.some(
+                (req) =>
+                  req.requester?.email?.trim().toLowerCase() ===
+                    friend.email?.trim().toLowerCase() &&
+                  req.status === "WAITING"
+              )}
+              // hasPendingRequests={requestsForFriend.some(
+              //   (req) =>
+              //     req.recipient?.email?.trim().toLowerCase() ===
+              //       friend.email?.trim().toLowerCase() &&
+              //     req.status === "WAITING"
+              // )}
+              // hasReceivedPendingRequests={requestsReceivedFromFriend.some(
+              //   (req) =>
+              //     req.requester?.email?.trim().toLowerCase() ===
+              //       friend.email?.trim().toLowerCase() &&
+              //     req.status === "WAITING"
+              // )}
             />
           </div>
         ))
