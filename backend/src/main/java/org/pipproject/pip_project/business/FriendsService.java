@@ -5,20 +5,21 @@ import org.pipproject.pip_project.model.FriendRequestStatus;
 import org.pipproject.pip_project.model.Friends;
 import org.pipproject.pip_project.model.User;
 import org.pipproject.pip_project.repositories.FriendsRepository;
+import org.pipproject.pip_project.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class FriendsService {
     private final FriendsRepository friendsRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public FriendsService(final FriendsRepository friendsRepository) {
+    public FriendsService(final FriendsRepository friendsRepository, UserRepository userRepository) {
         this.friendsRepository = friendsRepository;
+        this.userRepository = userRepository;
     }
 
     public void sendFriendRequest(User user, User friend) {
@@ -43,8 +44,15 @@ public class FriendsService {
         asUser.forEach(f -> friends.add(f.getFriend()));
         asFriend.forEach(f -> friends.add(f.getUser()));
 
-        return friends;
 
+        return Set.copyOf(friends).stream().toList();
+
+    }
+
+    public void deleteFriend(User user, User friend) {
+        Friends friendEntry = friendsRepository.findByUserAndFriend(user,friend).isPresent() ? friendsRepository.findByUserAndFriend(user,friend).get() : null;
+        assert friendEntry != null;
+        friendsRepository.delete(friendEntry);
     }
 
 }

@@ -56,4 +56,19 @@ public class FriendsController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PostMapping("/unfriend")
+    public ResponseEntity<?> unfriend(@RequestParam long userId, @RequestParam long friendId) {
+        try{
+            User user = userService.findUserById(userId);
+            User friend = userService.findUserById(friendId);
+
+            friendsService.deleteFriend(user,friend);
+            return new ResponseEntity<>("Friend deleted successfully",HttpStatus.OK);
+        }catch (Exception e){
+            Map<String, String> response = new HashMap<>();
+            response.put("message", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
 }
