@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,33 +16,33 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { loginUser } from "@/services/userService";
-import { useEffect, useState } from "react";
+import { registerUser } from "@/services/userService";
+import { useState } from "react";
 
 const formSchema = z.object({
   username: z.string().min(2, {
-    message: "Email must be at least 2 characters.",
+    message: "Username must be at least 2 characters.",
   }),
+
+  email: z.string().email({
+    message: "Email must be a valid email address.",
+  }),
+
   password: z.string().min(6, {
     message: "Password must be at least 6 characters.",
   }),
 });
 
-export function LoginForm() {
-  const navigate = useNavigate();
+formSchema.required();
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      const user = JSON.parse(storedUser);
-      navigate(`/dashboard/${user.id}`);
-    }
-  }, [navigate]);
+export function RegisterForm() {
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
+      email: "",
       password: "",
     },
   });
@@ -50,12 +51,26 @@ export function LoginForm() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const userData = await loginUser(values.username, values.password);
-      localStorage.setItem("user", JSON.stringify(userData));
-      navigate(`/dashboard/${userData.id}`);
+      const userData = await registerUser(
+        values.username,
+        values.email,
+        values.password
+      );
+
+      if (userData) {
+        toast.success("Registration successful. You can now log in.", {
+          icon: "✅",
+        });
+      } else {
+        toast.error("Registration failed. Please try again.", {
+          icon: "❌",
+        });
+      }
+
+      navigate("/login");
     } catch (err: unknown) {
-      setError("Invalid username or password.");
-      console.error("Login error:", err);
+      setError("Registration failed. Please try again.");
+      console.error("Registration error:", err);
     }
   };
 
@@ -63,16 +78,17 @@ export function LoginForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
+        autoComplete="off"
         className="space-y-6 p-6 border rounded-md shadow-sm max-w-md mx-auto mt-10"
       >
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Login</h1>
+          <h1 className="text-2xl font-bold">Register</h1>
           <Button
             variant="link"
-            onClick={() => navigate("/register")}
+            onClick={() => navigate("/login")}
             className="text-sm text-blue-500 hover:underline cursor-pointer"
           >
-            Register
+            Login
           </Button>
         </div>
 
@@ -83,9 +99,23 @@ export function LoginForm() {
           name="username"
           render={({ field }) => (
             <FormItem>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input placeholder="John Doe" autoComplete="off" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="youremail@mail.com" {...field} />
+                <Input type="email" autoComplete="off" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -99,7 +129,12 @@ export function LoginForm() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="••••••" {...field} />
+                <Input
+                  type="password"
+                  placeholder="••••••"
+                  autoComplete="new-password"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -107,7 +142,7 @@ export function LoginForm() {
         />
 
         <Button type="submit" className="w-full">
-          Login
+          Register
         </Button>
       </form>
     </Form>

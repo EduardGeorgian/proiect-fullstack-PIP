@@ -21,3 +21,16 @@ export const getUserFriends = async (id: string) => {
     params: { id: id },
   });
 };
+
+export const registerUser = async (
+  username: string,
+  email: string,
+  password: string
+) => {
+  const response = await axios.post(`${API_BASE_URL}/user/register`, {
+    username,
+    email,
+    password,
+  });
+  return response.data;
+};
