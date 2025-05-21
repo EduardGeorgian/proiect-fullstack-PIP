@@ -46,3 +46,13 @@ export interface TransferRequestDTO {
   recipientEmail: string;
   sourceAccountId: number | null;
 }
+
+export interface AccountCreateDTO {
+  currency: string;
+  user: {
+    id: number;
+    username: string;
+    email: string;
+    password: string | null;
+  };
+}

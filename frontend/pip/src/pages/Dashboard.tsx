@@ -3,6 +3,7 @@ import { getUserDashboard } from "@/services/userService";
 import { User, Account } from "@/lib/types";
 import UserProfileCard from "@/components/user/UserProfileCard";
 import AccountList from "@/components/account/AccountList";
+import CreateAccountDialog from "@/components/user/CreateAccountDialog";
 
 const Dashboard = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -39,8 +40,28 @@ const Dashboard = () => {
   return (
     <>
       <UserProfileCard username={user.username} email={user.email} />
-      <h2 className="text-2xl font-bold mt-4">Accounts</h2>
-      <AccountList accounts={accounts} />
+      <div className="flex justify-between items-center mt-4 mb-2">
+        <h2 className="text-2xl font-bold">Accounts</h2>
+        <CreateAccountDialog
+          accountCreateDTO={{
+            currency: "RON",
+            user: {
+              id: user.id,
+              email: user.email,
+              username: user.username,
+              password: null,
+            },
+          }}
+          onSuccess={(newAccounts) => {
+            setAccounts((prev) => [...prev, ...newAccounts]);
+          }}
+        />
+      </div>
+      {!accounts.length ? (
+        <p className="text-muted-foreground mt-2">No accounts found.</p>
+      ) : (
+        <AccountList accounts={accounts} />
+      )}
     </>
   );
 };

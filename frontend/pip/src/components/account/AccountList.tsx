@@ -6,16 +6,6 @@ interface AccountListProps {
 }
 
 export default function AccountList({ accounts }: AccountListProps) {
-  if (!accounts.length) {
-    return (
-      <Card>
-        <CardContent className="p-4 text-center text-sm text-muted-foreground">
-          No accounts found.
-        </CardContent>
-      </Card>
-    );
-  }
-
   return (
     <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
       {accounts.map((account) => (
