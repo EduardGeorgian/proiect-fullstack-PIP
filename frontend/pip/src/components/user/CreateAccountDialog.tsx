@@ -48,16 +48,16 @@ export default function CreateAccountDialog({
 
     setLoading(true);
     try {
-      await createAccount({ AccountCreateDTO: accountCreateDTO });
+      await createAccount(accountCreateDTO);
       const res = await getAccountsByUserEmail(accountCreateDTO.user.email);
-      onSuccess(res.data);
-      if (!res || !Array.isArray(res.data) || res.data.length === 0) {
-        toast.success("Account created successfully.", {
-          icon: "✅",
-        });
-        onSuccess([]);
-        return;
-      }
+      const accounts = res.data;
+      console.log(accounts);
+      onSuccess(accounts);
+      toast.success("Account created successfully.", {
+        icon: "✅",
+      });
+
+      return;
     } catch (err: any) {
       console.error(err);
       toast.error(err.response?.data?.error || "Failed to create account.", {

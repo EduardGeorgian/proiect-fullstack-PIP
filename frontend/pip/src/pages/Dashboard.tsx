@@ -53,7 +53,13 @@ const Dashboard = () => {
             },
           }}
           onSuccess={(newAccounts) => {
-            setAccounts((prev) => [...prev, ...newAccounts]);
+            setAccounts((prev) => {
+              const existingIds = new Set(prev.map((acc) => acc.id));
+              const filteredNew = newAccounts.filter(
+                (acc) => !existingIds.has(acc.id)
+              );
+              return [...prev, ...filteredNew];
+            });
           }}
         />
       </div>
