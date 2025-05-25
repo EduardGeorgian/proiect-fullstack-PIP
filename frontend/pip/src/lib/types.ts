@@ -56,3 +56,9 @@ export interface AccountCreateDTO {
     password: string | null;
   };
 }
+
+export interface DepositDTO {
+  accountId: number;
+  userEmail: string;
+  amount: number;
+}

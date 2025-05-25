@@ -34,3 +34,27 @@ export const registerUser = async (
   });
   return response.data;
 };
+
+export const getAllUsers = async (userEmail: string) => {
+  const response = await axios.post(`${API_BASE_URL}/user/users`, null, {
+    params: { userEmail: userEmail },
+  });
+
+  return response;
+};
+
+export const addFriend = async (userId: number, friendId: number) => {
+  const response = await axios.post(
+    `${API_BASE_URL}/friends/add`,
+    {
+      user_id: userId,
+      friend_id: friendId,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return response;
+};

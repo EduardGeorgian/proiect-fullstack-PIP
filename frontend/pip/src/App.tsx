@@ -9,6 +9,7 @@ import FriendsPage from "./pages/FriendsPage";
 import { Toaster } from "./components/ui/sonner";
 import { UserProvider } from "./context/UserContext";
 import { RegisterForm } from "./pages/Register";
+import MockPaymentPage from "./pages/MockPaymentPage";
 
 // TODO: Check routes to see if the problem with the id undefined has something to do with it
 
@@ -26,6 +27,7 @@ function App() {
               <Route path="/dashboard/:id" element={<Dashboard />} />={" "}
               <Route path="/transactions/:id" element={<TransactionsPage />} />={" "}
               <Route path="/friends/:id" element={<FriendsPage />} />={" "}
+              <Route path="/mock-payment" element={<MockPaymentPage />} />
             </Route>
           </Routes>
         </div>

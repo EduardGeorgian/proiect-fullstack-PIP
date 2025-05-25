@@ -1,4 +1,4 @@
-import { AccountCreateDTO } from "@/lib/types";
+import { AccountCreateDTO, DepositDTO } from "@/lib/types";
 import axios from "axios";
 
 const API_BASE_URL = "http://localhost:8080/api";
@@ -17,4 +17,8 @@ export const deleteAccount = async (accountId: number) => {
   return await axios.post(
     `${API_BASE_URL}/account/delete?accountId=${accountId}`
   );
+};
+
+export const depositToAccount = async (payload: DepositDTO) => {
+  return await axios.post(`${API_BASE_URL}/account/deposit`, payload);
 };
