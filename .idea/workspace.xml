@@ -5,40 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b03f36b-70e5-4ff4-9125-2b4530a9cc2f" name="Changes" comment="....">
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/org/pipproject/pip_project/business/AccountServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/org/pipproject/pip_project/business/FriendsServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/org/pipproject/pip_project/business/TransactionServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/org/pipproject/pip_project/business/TransferRequestServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/org/pipproject/pip_project/business/UserServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/org/pipproject/pip_project/controllers/AccountControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/org/pipproject/pip_project/controllers/FriendsControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/org/pipproject/pip_project/controllers/TransactionControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/org/pipproject/pip_project/controllers/TransferRequestControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/org/pipproject/pip_project/controllers/UserControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/AccountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/FriendsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/FriendsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/TransactionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/TransferRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/TransferRequestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/business/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/AccountCreateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/AccountCreateDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/AccountSendTransactionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/AccountSendTransactionDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/DepositDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/DepositDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/FriendRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/FriendRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/LoginDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/LoginDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/TransactionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/TransactionDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/TransferRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/TransferRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/UserRegisterDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/UserRegisterDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/UserWithAccountsDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/dto/UserWithAccountsDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/Friends.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/Friends.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/TransferRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/TransferRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/validators/TransactionDTOValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/validators/TransactionDTOValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/validators/TransactionValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/validators/TransactionValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/validators/TransferRequestValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/validators/TransferRequestValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/pipproject/pip_project/repositories/UserRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +26,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -87,25 +63,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.PipProjectApplicationTests.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.PipProjectApplication.executor": "Run",
-    "git-widget-placeholder": "dev",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.PipProjectApplicationTests.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.PipProjectApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="JUnit.PipProjectApplicationTests">
+}</component>
+  <component name="RunManager" selected="Spring Boot.PipProjectApplication">
     <configuration name="PipProjectApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PIP_project" />
       <extension name="coverage">
