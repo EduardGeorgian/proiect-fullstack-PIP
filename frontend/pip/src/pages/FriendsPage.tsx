@@ -22,6 +22,7 @@ import RequestListDialog from "@/components/user/RequestListDialog";
 import { TransferRequest } from "@/lib/types";
 import TransferRequestsDialog from "@/components/user/TransferRequestsDialog";
 import { mapToTransferRequestDTO } from "@/utils/mappingTransferRequestToDTO";
+import FriendSearch from "@/components/user/FriendSearch";
 
 export default function FriendsPage() {
   const [user, setUser] = useState<User | null>(null);
@@ -318,6 +319,7 @@ export default function FriendsPage() {
     <>
       <UserProfileCard username={user.username} email={user.email} />
 
+      <FriendSearch currentUserEmail={user.email} currentUserId={user.id} />
       <h2 className="text-2xl font-bold mt-4">Friends</h2>
 
       {loading ? (
@@ -351,18 +353,6 @@ export default function FriendsPage() {
                     friend.email?.trim().toLowerCase() &&
                   req.status === "WAITING"
               )}
-              // hasPendingRequests={requestsForFriend.some(
-              //   (req) =>
-              //     req.recipient?.email?.trim().toLowerCase() ===
-              //       friend.email?.trim().toLowerCase() &&
-              //     req.status === "WAITING"
-              // )}
-              // hasReceivedPendingRequests={requestsReceivedFromFriend.some(
-              //   (req) =>
-              //     req.requester?.email?.trim().toLowerCase() ===
-              //       friend.email?.trim().toLowerCase() &&
-              //     req.status === "WAITING"
-              // )}
             />
           </div>
         ))
