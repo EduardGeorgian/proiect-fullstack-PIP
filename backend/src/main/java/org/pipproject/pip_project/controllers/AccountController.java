@@ -87,7 +87,20 @@ public class AccountController {
     }
 
 
-
+    @PostMapping("/delete")
+    public ResponseEntity<?> deleteAccount(@RequestParam Long accountId){
+        try{
+            accountService.deleteAccount(accountId);
+            Map<String,String> response = new HashMap<>();
+            response.put("accountId",accountId.toString());
+            response.put("message","Account deleted successfully");
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        }catch (Exception e){
+            Map<String,String> error = new HashMap<>();
+            error.put("error",e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        }
+    }
 
 
 }

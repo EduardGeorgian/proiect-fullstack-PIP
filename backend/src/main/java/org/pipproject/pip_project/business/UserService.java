@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Serviciu pentru gestionarea operațiunilor legate de utilizatori,
@@ -98,6 +100,14 @@ public class UserService {
         User user = this.findUserByEmail(email);
 
         return passwordEncoder.matches(password, user.getPassword());
+    }
+
+    public List<User> findAllUsers(String userEmail) throws Exception {
+        Optional<User> currentUser = userRepository.findByEmail(userEmail);
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .filter(user -> !user.getEmail().equals(userEmail))
+                .toList();
     }
 
 }

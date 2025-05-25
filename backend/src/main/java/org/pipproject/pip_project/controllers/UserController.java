@@ -7,6 +7,7 @@ import org.pipproject.pip_project.dto.UserRegisterDTO;
 import org.pipproject.pip_project.dto.UserWithAccountsDTO;
 import org.pipproject.pip_project.model.Account;
 import org.pipproject.pip_project.model.User;
+import org.pipproject.pip_project.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * REST controller that handles user-related operations such as registration, login,
@@ -27,6 +29,7 @@ public class UserController {
 
     private final UserService userService;
     private final AccountService accountService;
+    private final UserRepository userRepository;
 
     /**
      * Constructor for {@link UserController}.
@@ -35,9 +38,10 @@ public class UserController {
      * @param accountService service handling account-related logic
      */
     @Autowired
-    public UserController(UserService userService, AccountService accountService) {
+    public UserController(UserService userService, AccountService accountService, UserRepository userRepository) {
         this.userService = userService;
         this.accountService = accountService;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -99,6 +103,18 @@ public class UserController {
             Map<String, String> response = new HashMap<>();
             response.put("error", e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
+    }
+
+    @PostMapping("users")
+    public ResponseEntity<?> getAllUsers(@RequestParam String userEmail){
+        try{
+            List<User> filteredUsers = userService.findAllUsers(userEmail);
+            return ResponseEntity.status(HttpStatus.OK).body(filteredUsers);
+        }catch (Exception e){
+            Map<String, String> response = new HashMap<>();
+            response.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
 }
