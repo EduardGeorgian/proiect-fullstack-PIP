@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import {
@@ -36,10 +37,13 @@ export default function ClearTransactionsDialog({
       await clearCompletedOrFailedTransactions(userEmail);
       const res = await getTransactionsByUserEmail(userEmail);
       onSuccess(res.data);
-
-      toast.success("Completed and failed transactions were deleted.", {
-        icon: "✅",
-      });
+      if (!res || !Array.isArray(res.data) || res.data.length === 0) {
+        toast.success("All completed and failed transactions were deleted.", {
+          icon: "✅",
+        });
+        onSuccess([]);
+        return;
+      }
     } catch (err: any) {
       console.error(err);
       toast.error(
