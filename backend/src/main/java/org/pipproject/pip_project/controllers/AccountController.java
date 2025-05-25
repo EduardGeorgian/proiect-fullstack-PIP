@@ -17,32 +17,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * REST controller for handling account-related operations such as creating accounts,
- * fetching accounts, and depositing funds.
- */
+
 @RestController
 @RequestMapping("/api/account")
 @CrossOrigin(origins = "*")
 public class AccountController {
     private final AccountService accountService;
 
-    /**
-     * Constructs the AccountController with a provided AccountService.
-     *
-     * @param accountService the service used for account-related operations
-     */
     @Autowired
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
     }
 
-    /**
-     * Creates a new account based on the provided AccountCreateDTO.
-     *
-     * @param account the account creation data transfer object
-     * @return a {@link ResponseEntity} with the created account or an error message
-     */
     @PostMapping("/create")
     public ResponseEntity<?> createAccount(@RequestBody AccountCreateDTO account) {
         try {
@@ -55,12 +41,6 @@ public class AccountController {
         }
     }
 
-    /**
-     * Retrieves all accounts associated with a given user email.
-     *
-     * @param email the user's email address
-     * @return a {@link ResponseEntity} containing a list of accounts or an error message
-     */
     @GetMapping("")
     public ResponseEntity<?> getAllAccounts(@RequestParam String email) {
         try {
@@ -76,12 +56,6 @@ public class AccountController {
         }
     }
 
-    /**
-     * Retrieves simplified account information for transaction purposes for a specific user.
-     *
-     * @param userEmail the email address of the user
-     * @return a {@link ResponseEntity} containing a list of {@link AccountSendTransactionDTO} or an error message
-     */
     @GetMapping("/{userEmail}")
     public ResponseEntity<?> getAccountsForTransactions(@PathVariable String userEmail){
         try {
@@ -95,12 +69,6 @@ public class AccountController {
         }
     }
 
-    /**
-     * Deposits a specified amount into an account.
-     *
-     * @param depositDTO the deposit data transfer object containing account ID, user email, and amount
-     * @return a {@link ResponseEntity} with the updated account or an error message
-     */
     @PostMapping("/deposit")
     public ResponseEntity<?> depositBalance(@RequestBody DepositDTO depositDTO){
         try {
@@ -117,4 +85,9 @@ public class AccountController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
         }
     }
+
+
+
+
+
 }

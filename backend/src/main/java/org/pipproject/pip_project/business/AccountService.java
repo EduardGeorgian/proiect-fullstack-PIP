@@ -117,4 +117,14 @@ public class AccountService {
         account.setBalance(account.getBalance() + amount);
         return accountRepository.save(account);
     }
+
+    @Transactional
+    public void deleteAccount(Long accountId) {
+        Optional<Account> accountOpt = accountRepository.findById(accountId);
+        if (accountOpt.isEmpty()) {
+            throw new RuntimeException("Account not found");
+        }
+        Account account = accountOpt.get();
+        accountRepository.delete(account);
+    }
 }
