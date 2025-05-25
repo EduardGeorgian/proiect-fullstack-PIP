@@ -1,6 +1,5 @@
 package org.pipproject.pip_project.controllers;
 
-
 import org.pipproject.pip_project.business.AccountService;
 import org.pipproject.pip_project.business.TransactionService;
 import org.pipproject.pip_project.dto.TransactionDTO;
@@ -18,6 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controller for managing transactions including transfers, withdrawals, deposits, and transaction history.
+ */
 @Controller
 @RequestMapping("/api/transactions")
 @CrossOrigin(origins = "*")
@@ -25,12 +27,24 @@ public class TransactionController {
     private final TransactionService transactionService;
     private final AccountService accountService;
 
+    /**
+     * Constructor for TransactionController.
+     *
+     * @param transactionService service handling transaction logic
+     * @param accountService     service handling account operations
+     */
     @Autowired
     public TransactionController(TransactionService transactionService, AccountService accountService) {
         this.transactionService = transactionService;
         this.accountService = accountService;
     }
 
+    /**
+     * Sends a transfer between two accounts.
+     *
+     * @param transactionDTO DTO containing transfer details
+     * @return a {@link ResponseEntity} with the created transaction or an error message
+     */
     @PostMapping("/send")
     public ResponseEntity<?> addTransfer(@RequestBody TransactionDTO transactionDTO) {
         try {
@@ -54,6 +68,12 @@ public class TransactionController {
         }
     }
 
+    /**
+     * Processes a withdrawal from an account.
+     *
+     * @param transactionDTO DTO containing withdrawal details
+     * @return a {@link ResponseEntity} with the created transaction or an error message
+     */
     @PostMapping("/withdraw")
     public ResponseEntity<?> addWithdrawal(@RequestBody TransactionDTO transactionDTO) {
         try {
@@ -75,6 +95,12 @@ public class TransactionController {
         }
     }
 
+    /**
+     * Processes a deposit into an account.
+     *
+     * @param transactionDTO DTO containing deposit details
+     * @return a {@link ResponseEntity} with the created transaction or an error message
+     */
     @PostMapping("/deposit")
     public ResponseEntity<?> addDeposit(@RequestBody TransactionDTO transactionDTO) {
         try {
@@ -96,6 +122,12 @@ public class TransactionController {
         }
     }
 
+    /**
+     * Retrieves all transactions for a specific user.
+     *
+     * @param initiatorEmail the email of the user
+     * @return a {@link ResponseEntity} containing a list of transactions or an error
+     */
     @GetMapping("")
     public ResponseEntity<?> getAllTransactions(@RequestParam String initiatorEmail) {
         try{
@@ -111,6 +143,12 @@ public class TransactionController {
         }
     }
 
+    /**
+     * Deletes all completed or failed transactions for a specific user.
+     *
+     * @param initiatorEmail the email of the user
+     * @return a {@link ResponseEntity} with confirmation or an error message
+     */
     @DeleteMapping("/clear")
     public ResponseEntity<?> deleteUserTransactions(@RequestParam String initiatorEmail) {
         try {
@@ -122,5 +160,4 @@ public class TransactionController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
-
 }

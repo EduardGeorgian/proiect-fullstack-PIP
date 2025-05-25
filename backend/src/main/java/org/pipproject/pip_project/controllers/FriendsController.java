@@ -14,6 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * REST controller for managing user friendships, including adding,
+ * retrieving, and removing friends.
+ */
 @RestController
 @RequestMapping("api/friends")
 @CrossOrigin(origins = "*")
@@ -21,12 +25,24 @@ public class FriendsController {
     private final FriendsService friendsService;
     private final UserService userService;
 
+    /**
+     * Constructs a FriendsController with required services.
+     *
+     * @param friendsService service to manage friendship logic
+     * @param userService    service to handle user-related operations
+     */
     @Autowired
     public FriendsController(FriendsService friendsService, UserService userService) {
         this.friendsService = friendsService;
         this.userService = userService;
     }
 
+    /**
+     * Sends a friend request from one user to another.
+     *
+     * @param friendRequest DTO containing user ID and friend ID
+     * @return a {@link ResponseEntity} indicating success or failure
+     */
     @PostMapping("/add")
     public ResponseEntity<?> addFriend(@RequestBody FriendRequestDTO friendRequest) {
         try{
@@ -41,6 +57,12 @@ public class FriendsController {
         }
     }
 
+    /**
+     * Retrieves a list of all friends for a given user.
+     *
+     * @param id the ID of the user whose friends are to be fetched
+     * @return a {@link ResponseEntity} with the list of friends or an error
+     */
     @GetMapping("")
     public ResponseEntity<?> getAllFriends(@RequestParam(required = false) long id) {
         try{
@@ -57,6 +79,13 @@ public class FriendsController {
         }
     }
 
+    /**
+     * Removes a friend from the user's friend list.
+     *
+     * @param userId   the ID of the user
+     * @param friendId the ID of the friend to remove
+     * @return a {@link ResponseEntity} indicating success or failure
+     */
     @PostMapping("/unfriend")
     public ResponseEntity<?> unfriend(@RequestParam long userId, @RequestParam long friendId) {
         try{
