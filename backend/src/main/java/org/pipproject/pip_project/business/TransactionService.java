@@ -1,6 +1,5 @@
 package org.pipproject.pip_project.business;
 
-
 import jakarta.transaction.Transactional;
 import org.pipproject.pip_project.model.*;
 import org.pipproject.pip_project.repositories.AccountRepository;
@@ -13,6 +12,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/**
+ * Service pentru gestionarea tranzacțiilor financiare între conturi.
+ * Include operațiuni de transfer, retragere și depunere,
+ * precum și interogarea și ștergerea tranzacțiilor pentru un utilizator.
+ */
 @Service
 public class TransactionService {
 
@@ -21,6 +25,14 @@ public class TransactionService {
     private final UserRepository userRepository;
     private final FriendsRepository friendsRepository;
 
+    /**
+     * Constructor pentru TransactionService.
+     *
+     * @param transactionRepository repository pentru entitatea Transaction
+     * @param accountRepository repository pentru entitatea Account
+     * @param userRepository repository pentru entitatea User
+     * @param friendsRepository repository pentru entitatea Friends (folosit, deși nu în metodele actuale)
+     */
     @Autowired
     public TransactionService(TransactionRepository transactionRepository, AccountRepository accountRepository, UserRepository userRepository, FriendsRepository friendsRepository) {
         this.transactionRepository = transactionRepository;
@@ -29,6 +41,16 @@ public class TransactionService {
         this.friendsRepository = friendsRepository;
     }
 
+    /**
+     * Adaugă o tranzacție de tip transfer între două conturi.
+     * Validează tranzacția, actualizează balanțele și salvează tranzacția.
+     *
+     * @param initiatorEmail emailul utilizatorului care inițiază transferul
+     * @param amount suma transferată
+     * @param sourceAccount contul sursă de unde se scade suma
+     * @param destinationAccount contul destinatar unde se adaugă suma
+     * @return tranzacția creată și salvată în baza de date
+     */
     @Transactional
     public Transaction addTransfer(String initiatorEmail, double amount, Account sourceAccount, Account destinationAccount) {
         TransactionValidator.validate(TransactionType.TRANSFER, amount, sourceAccount, destinationAccount);
@@ -42,6 +64,15 @@ public class TransactionService {
         return transactionRepository.save(transaction);
     }
 
+    /**
+     * Adaugă o tranzacție de tip retragere de la un cont.
+     * Validează tranzacția, actualizează balanța contului și salvează tranzacția.
+     *
+     * @param initiatorEmail emailul utilizatorului care inițiază retragerea
+     * @param amount suma retrasă
+     * @param sourceAccount contul de unde se retrage suma
+     * @return tranzacția creată și salvată în baza de date
+     */
     @Transactional
     public Transaction addWithdrawal(String initiatorEmail, double amount, Account sourceAccount) {
         TransactionValidator.validate(TransactionType.WITHDRAWAL, amount, sourceAccount, null);
@@ -53,9 +84,18 @@ public class TransactionService {
         return transactionRepository.save(transaction);
     }
 
+    /**
+     * Adaugă o tranzacție de tip depunere într-un cont.
+     * Validează tranzacția, actualizează balanța contului și salvează tranzacția.
+     *
+     * @param initiatorEmail emailul utilizatorului care inițiază depunerea
+     * @param amount suma depusă
+     * @param destinationAccount contul în care se depune suma
+     * @return tranzacția creată și salvată în baza de date
+     */
     @Transactional
     public Transaction addDeposit(String initiatorEmail, double amount, Account destinationAccount) {
-        TransactionValidator.validate(TransactionType.DEPOSIT, amount,null, destinationAccount);
+        TransactionValidator.validate(TransactionType.DEPOSIT, amount, null, destinationAccount);
 
         destinationAccount.setBalance(destinationAccount.getBalance() + amount);
         accountRepository.save(destinationAccount);
@@ -64,7 +104,14 @@ public class TransactionService {
         return transactionRepository.save(transaction);
     }
 
-
+    /**
+     * Obține toate tranzacțiile legate de un utilizator, atât cele inițiate cât și cele primite.
+     * Aruncă excepție dacă utilizatorul nu este găsit.
+     *
+     * @param initiatorEmail emailul utilizatorului pentru care se interoghează tranzacțiile
+     * @return listă de tranzacții sortate descrescător după dată
+     * @throws Exception dacă utilizatorul nu este găsit
+     */
     public List<Transaction> getAllTransactions(String initiatorEmail) throws Exception {
         Optional<User> userOpt = userRepository.findByEmail(initiatorEmail);
         if (userOpt.isEmpty()) {
@@ -85,6 +132,13 @@ public class TransactionService {
         return all;
     }
 
+    /**
+     * Șterge toate tranzacțiile cu statusul COMPLETED sau FAILED pentru un utilizator.
+     * Aruncă excepție dacă utilizatorul nu este găsit.
+     *
+     * @param initiatorEmail emailul utilizatorului al cărui tranzacții vor fi șterse
+     * @throws Exception dacă utilizatorul nu este găsit
+     */
     @Transactional
     public void deleteCompletedOrFailedTransactionsForUser(String initiatorEmail) throws Exception {
         Optional<User> userOpt = userRepository.findByEmail(initiatorEmail);

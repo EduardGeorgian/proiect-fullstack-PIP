@@ -3,8 +3,22 @@ package org.pipproject.pip_project.validators;
 import org.pipproject.pip_project.model.Account;
 import org.pipproject.pip_project.model.TransactionType;
 
+/**
+ * Validator for transaction business rules.
+ * Checks if transaction details like accounts and amounts are valid for given transaction type.
+ */
 public class TransactionValidator {
-    public static void validate(TransactionType type, double amount, Account sourceAccount, Account destinationAccount){
+
+    /**
+     * Validates transaction parameters based on type and involved accounts.
+     *
+     * @param type the type of transaction (TRANSFER, WITHDRAWAL, REQUEST, etc.)
+     * @param amount the amount involved in the transaction
+     * @param sourceAccount the source account (can be null for some types)
+     * @param destinationAccount the destination account (can be null for some types)
+     * @throws IllegalArgumentException if validation fails
+     */
+    public static void validate(TransactionType type, double amount, Account sourceAccount, Account destinationAccount) {
         if(amount <= 0)
             throw new IllegalArgumentException("Amount must be greater than 0");
 

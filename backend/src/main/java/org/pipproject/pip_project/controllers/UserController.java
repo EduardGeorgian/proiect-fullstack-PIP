@@ -1,6 +1,5 @@
 package org.pipproject.pip_project.controllers;
 
-
 import org.pipproject.pip_project.business.AccountService;
 import org.pipproject.pip_project.business.UserService;
 import org.pipproject.pip_project.dto.LoginDTO;
@@ -17,19 +16,36 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * REST controller that handles user-related operations such as registration, login,
+ * and retrieving user details.
+ */
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins = "*")//pentru accesare din frontend, de pe alt domeniu decat local
+@CrossOrigin(origins = "*")
 public class UserController {
+
     private final UserService userService;
     private final AccountService accountService;
 
+    /**
+     * Constructor for {@link UserController}.
+     *
+     * @param userService    service handling user logic
+     * @param accountService service handling account-related logic
+     */
     @Autowired
     public UserController(UserService userService, AccountService accountService) {
         this.userService = userService;
         this.accountService = accountService;
     }
 
+    /**
+     * Registers a new user.
+     *
+     * @param user data for registration
+     * @return the created {@link User} or error message
+     */
     @PostMapping("/register")
     public ResponseEntity<?> createUser(@RequestBody UserRegisterDTO user) {
         try {
@@ -42,13 +58,18 @@ public class UserController {
         }
     }
 
-    @GetMapping("/{userId}")//path parameter, dynamic
+    /**
+     * Retrieves a user and their associated accounts by user ID.
+     *
+     * @param userId ID of the user
+     * @return {@link UserWithAccountsDTO} object or error message
+     */
+    @GetMapping("/{userId}")
     public ResponseEntity<?> getUser(@PathVariable Long userId) {
         try {
             User requestedUser = userService.findUserById(userId);
             List<Account> accountList = accountService.getAccountsByUser(requestedUser.getEmail());
             UserWithAccountsDTO response = new UserWithAccountsDTO(requestedUser, accountList);
-
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
             Map<String, String> response = new HashMap<>();
@@ -57,16 +78,21 @@ public class UserController {
         }
     }
 
+    /**
+     * Validates user login credentials.
+     *
+     * @param loginDTO contains email and password
+     * @return {@link User} if login is successful, or error message if not
+     */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
         try {
             if (userService.validateUserCredentials(loginDTO.getEmail(), loginDTO.getPassword())) {
                 User requestedUser = userService.findUserByEmail(loginDTO.getEmail());
                 return ResponseEntity.status(HttpStatus.OK).body(requestedUser);
-            }
-            else{
+            } else {
                 Map<String, String> response = new HashMap<>();
-                response.put("error","Invalid password");
+                response.put("error", "Invalid password");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
             }
         } catch (Exception e) {
