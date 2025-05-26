@@ -58,3 +58,58 @@ export const addFriend = async (userId: number, friendId: number) => {
   );
   return response;
 };
+
+export const getReceivedFriendRequests = async (userId: number) => {
+  const response = await axios.get(
+    `${API_BASE_URL}/friends/requests/received`,
+    {
+      params: { userId: userId },
+    }
+  );
+  return response.data;
+};
+
+export const acceptFriendRequest = async (userId: number, senderId: number) => {
+  const response = await axios.post(
+    `${API_BASE_URL}/friends/requests/accept`,
+    {
+      user_id: userId,
+      friend_id: senderId,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return response.data;
+};
+
+export const rejectFriendRequest = async (userId: number, senderId: number) => {
+  const response = await axios.post(
+    `${API_BASE_URL}/friends/requests/reject`,
+    {
+      user_id: userId,
+      friend_id: senderId,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return response.data;
+};
+
+export const unfriendUser = async (userId: number, friendId: number) => {
+  const response = await axios.post(
+    `${API_BASE_URL}/friends/unfriend?userId=${userId}&friendId=${friendId}`,
+    null, // nu trimitem body
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return response.data;
+};

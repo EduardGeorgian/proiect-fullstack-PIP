@@ -100,4 +100,71 @@ public class FriendsController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
     }
+
+    /**
+     * Accepts a friend request sent by another user.
+     *
+     * @param friendRequest DTO containing the sender and current user IDs
+     * @return a {@link ResponseEntity} indicating success or failure
+     */
+    @PostMapping("requests/accept")
+    public ResponseEntity<?> acceptFriendRequest(@RequestBody FriendRequestDTO friendRequest) {
+        try {
+            User currentUser = userService.findUserById(friendRequest.getUser_id()); // cel care accepta
+            User sender = userService.findUserById(friendRequest.getFriend_id()); // cel care a trimis cererea
+
+            friendsService.acceptFriendRequest(currentUser, sender);
+            return ResponseEntity.status(HttpStatus.OK).body("Friend request accepted");
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("message", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * Rejects a friend request sent by another user.
+     *
+     * @param friendRequest DTO containing the sender and current user IDs
+     * @return a {@link ResponseEntity} indicating success or failure
+     */
+    @PostMapping("requests/reject")
+    public ResponseEntity<?> rejectFriendRequest(@RequestBody FriendRequestDTO friendRequest) {
+        try {
+            User currentUser = userService.findUserById(friendRequest.getUser_id()); // cel care respinge
+            User sender = userService.findUserById(friendRequest.getFriend_id()); // cel care a trimis cererea
+
+            friendsService.rejectFriendRequest(currentUser, sender);
+            return ResponseEntity.status(HttpStatus.OK).body("Friend request rejected");
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("message", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * Lists all pending friend requests received by a user.
+     *
+     * @param userId the ID of the current user
+     * @return a {@link ResponseEntity} with the list of pending requests
+     */
+    @GetMapping("/requests/received")
+    public ResponseEntity<?> getReceivedFriendRequests(@RequestParam long userId) {
+        try {
+            User user = userService.findUserById(userId);
+            List<User> pendingSenders = friendsService.getReceivedFriendRequests(user);
+
+            if (pendingSenders.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            }
+
+            return ResponseEntity.ok(pendingSenders);
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("message", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
