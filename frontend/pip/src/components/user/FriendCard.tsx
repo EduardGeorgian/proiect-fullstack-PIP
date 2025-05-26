@@ -11,6 +11,7 @@ interface Props {
   onViewReceivedRequestsClick?: () => void;
   onSendClick?: () => void;
   onRequestClick?: () => void;
+  onUnfriendClick?: () => void;
 }
 
 export default function FriendCard({
@@ -21,6 +22,7 @@ export default function FriendCard({
   onViewReceivedRequestsClick,
   onSendClick,
   onRequestClick,
+  onUnfriendClick,
 }: Props) {
   return (
     <Card className="flex flex-row justify-between items-start gap-4 p-4 relative ">
@@ -82,6 +84,7 @@ export default function FriendCard({
         <Button
           variant="outline"
           className="size-sm cursor-pointer bg-gray-200 hover:bg-red-300"
+          onClick={onUnfriendClick}
         >
           Unfriend
         </Button>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Service pentru gestionarea prieteniilor între utilizatori.
@@ -41,18 +42,27 @@ public class FriendsService {
      * @throws IllegalStateException dacă cererea este deja trimisă sau prietenia este acceptată
      */
     public void sendFriendRequest(User user, User friend) {
-        boolean alreadyRequested = friendsRepository.findByUserAndFriend(user,friend).isPresent();
-        if (alreadyRequested && friendsRepository.findByUserAndFriend(user,friend).get().getStatus()==FriendRequestStatus.PENDING) {
-            throw new IllegalStateException("Friend request already sent");
-        } else if(alreadyRequested && friendsRepository.findByUserAndFriend(user,friend).get().getStatus()==FriendRequestStatus.ACCEPTED) {
-            throw new IllegalStateException("Already accepted");
+        Optional<Friends> existing = friendsRepository
+                .findByUsers(user, friend);
+
+        if (existing.isPresent()) {
+            FriendRequestStatus status = existing.get().getStatus();
+
+            if (status == FriendRequestStatus.PENDING) {
+                throw new IllegalStateException("Friend request already sent or received");
+            } else if (status == FriendRequestStatus.ACCEPTED) {
+                throw new IllegalStateException("You are already friends");
+            }
         }
+
+        // Nu exista cerere, creez una noua
         Friends friendRequest = new Friends();
         friendRequest.setUser(user);
         friendRequest.setFriend(friend);
         friendRequest.setStatus(FriendRequestStatus.PENDING);
         friendsRepository.save(friendRequest);
     }
+
 
     /**
      * Obține lista tuturor prietenilor unui utilizator.
@@ -79,8 +89,60 @@ public class FriendsService {
      * @param friend utilizatorul care va fi eliminat din lista de prieteni
      */
     public void deleteFriend(User user, User friend) {
-        Friends friendEntry = friendsRepository.findByUserAndFriend(user,friend).isPresent() ? friendsRepository.findByUserAndFriend(user,friend).get() : null;
-        assert friendEntry != null;
-        friendsRepository.delete(friendEntry);
+        Optional<Friends> friendEntryOpt = friendsRepository.findByUsers(user, friend); // vezi mai jos metoda
+
+        if (friendEntryOpt.isEmpty()) {
+            throw new IllegalStateException("Friendship not found");
+        }
+
+        friendsRepository.delete(friendEntryOpt.get());
     }
+
+
+    public List<User> getReceivedFriendRequests(User user) {
+        List<Friends> receivedRequests = friendsRepository.findAllByFriendAndStatus(Optional.ofNullable(user), FriendRequestStatus.PENDING);
+        // Extragem doar utilizatorii care au trimis cererea
+        return receivedRequests.stream()
+                .map(Friends::getUser) // user = cel care a trimis cererea
+                .collect(Collectors.toList());
+    }
+
+    public void acceptFriendRequest(User currentUser, User sender) {
+        Optional<Friends> friendRequestOpt = friendsRepository
+                .findByUserAndFriend(sender, currentUser); // invers: sender → currentUser
+
+        if (friendRequestOpt.isEmpty()) {
+            throw new IllegalStateException("Friend request not found");
+        }
+
+        Friends friendRequest = friendRequestOpt.get();
+
+        if (friendRequest.getStatus() != FriendRequestStatus.PENDING) {
+            throw new IllegalStateException("Friend request is not pending");
+        }
+
+        friendRequest.setStatus(FriendRequestStatus.ACCEPTED);
+        friendsRepository.save(friendRequest);
+    }
+
+    public void rejectFriendRequest(User currentUser, User sender) {
+        Optional<Friends> friendRequestOpt = friendsRepository
+                .findByUserAndFriend(sender, currentUser); // cererea e de la sender → currentUser
+
+        if (friendRequestOpt.isEmpty()) {
+            throw new IllegalStateException("Friend request not found");
+        }
+
+        Friends friendRequest = friendRequestOpt.get();
+
+        if (friendRequest.getStatus() != FriendRequestStatus.PENDING) {
+            throw new IllegalStateException("Friend request is not pending");
+        }
+
+        friendRequest.setStatus(FriendRequestStatus.REJECTED);
+        friendsRepository.save(friendRequest);
+    }
+
+
+
 }

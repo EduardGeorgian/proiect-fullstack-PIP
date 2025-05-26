@@ -7,12 +7,14 @@ import { addFriend, getAllUsers } from "@/services/userService";
 
 type Props = {
   currentUserEmail: string;
-  currentUserId?: number; // Optional, if needed for friend requests
+  currentUserId?: number;
+  friends?: User[]; // Optional, if needed for friend requests
 };
 
 export default function FriendSearch({
   currentUserEmail,
   currentUserId,
+  friends = [],
 }: Props) {
   const [users, setUsers] = useState<User[]>([]);
   const [search, setSearch] = useState("");
@@ -36,18 +38,25 @@ export default function FriendSearch({
   useEffect(() => {
     if (search.trim().length > 0) {
       const lower = search.toLowerCase();
+
+      const safeFriends = Array.isArray(friends) ? friends : [];
+      const friendIds = new Set(safeFriends.map((f) => f.id));
+
       const matches = users.filter(
         (user) =>
-          user.username.toLowerCase().includes(lower) ||
-          user.email.toLowerCase().includes(lower)
+          user.id !== currentUserId &&
+          !friendIds.has(user.id) &&
+          (user.username.toLowerCase().includes(lower) ||
+            user.email.toLowerCase().includes(lower))
       );
+
       setFiltered(matches);
       setOpen(true);
     } else {
       setFiltered([]);
       setOpen(false);
     }
-  }, [search, users]);
+  }, [search, users, friends, currentUserId]);
 
   const handleAddFriend = async (userId: number) => {
     if (typeof currentUserId === "undefined") {
@@ -88,7 +97,7 @@ export default function FriendSearch({
   return (
     <>
       <div
-        className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
+        className="fixed inset-0 bg-black/30 backdrop-blur-xs z-40"
         onClick={handleClose}
       />
       <div className="fixed top-1/4 left-1/2 -translate-x-1/2 w-full max-w-xl bg-white rounded-xl shadow-xl p-6 z-50">

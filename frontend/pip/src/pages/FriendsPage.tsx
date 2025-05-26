@@ -3,7 +3,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 import FriendCard from "@/components/user/FriendCard";
 import UserProfileCard from "@/components/user/UserProfileCard";
 import { User } from "@/lib/types";
-import { getUserDashboard, getUserFriends } from "@/services/userService";
+import {
+  getReceivedFriendRequests,
+  getUserDashboard,
+  getUserFriends,
+  unfriendUser,
+} from "@/services/userService";
 import { useEffect, useState } from "react";
 import SendMoneyDialog from "@/components/user/SendMoneyDialog";
 import {
@@ -23,6 +28,8 @@ import { TransferRequest } from "@/lib/types";
 import TransferRequestsDialog from "@/components/user/TransferRequestsDialog";
 import { mapToTransferRequestDTO } from "@/utils/mappingTransferRequestToDTO";
 import FriendSearch from "@/components/user/FriendSearch";
+import FriendRequests from "@/components/user/FriendRequests";
+import { Bell } from "lucide-react";
 
 export default function FriendsPage() {
   const [user, setUser] = useState<User | null>(null);
@@ -48,6 +55,8 @@ export default function FriendsPage() {
   const [receivedRequests, setReceivedRequests] = useState<TransferRequest[]>(
     []
   );
+  const [showFriendRequests, setShowFriendRequests] = useState(false);
+  const [pendingFriendRequests, setPendingFriendRequests] = useState<number>(0);
 
   // Load user from localStorage and fetch friends
   useEffect(() => {
@@ -110,6 +119,19 @@ export default function FriendsPage() {
     };
     fetchFriends();
   }, [transferBalance]);
+
+  useEffect(() => {
+    if (!user) return;
+    const fetchPendingRequests = async () => {
+      try {
+        const data = await getReceivedFriendRequests(user.id);
+        setPendingFriendRequests(data.length);
+      } catch (err) {
+        console.error("Could not fetch pending friend requests", err);
+      }
+    };
+    fetchPendingRequests();
+  }, [user]);
 
   // Fetch account info when selecting a friend
   useEffect(() => {
@@ -313,14 +335,63 @@ export default function FriendsPage() {
     }
   };
 
+  const handleUnfriend = async (userId: number, friendId: number) => {
+    if (!user) return;
+    try {
+      await unfriendUser(userId, friendId);
+      setFriends((prev) => prev.filter((f) => f.id !== friendId));
+      toast.success("Unfriended successfully.", {
+        icon: <CheckCircle className="text-green-500" />,
+      });
+    } catch (err) {
+      console.error("Failed to unfriend:", err);
+      toast.error("Failed to unfriend.", {
+        icon: <XCircle className="text-red-500" />,
+      });
+    }
+  };
+
   if (!user) return <div>Se încarcă...</div>;
 
   return (
     <>
       <UserProfileCard username={user.username} email={user.email} />
 
-      <FriendSearch currentUserEmail={user.email} currentUserId={user.id} />
+      <FriendSearch
+        currentUserEmail={user.email}
+        currentUserId={user.id}
+        friends={friends}
+      />
       <h2 className="text-2xl font-bold mt-4">Friends</h2>
+
+      <div className="my-4 flex items-center gap-2">
+        <button
+          onClick={() => setShowFriendRequests(true)}
+          className="flex items-center gap-2 text-blue-600 hover:underline"
+        >
+          <Bell className="w-5 h-5" />
+          You have {pendingFriendRequests} friend request(s)
+        </button>
+      </div>
+
+      {showFriendRequests && (
+        <FriendRequests
+          currentUserId={user.id}
+          open={showFriendRequests}
+          onClose={() => setShowFriendRequests(false)}
+          onAcceptedOrRejected={async () => {
+            try {
+              const updated = await getReceivedFriendRequests(user.id);
+              setPendingFriendRequests(updated.length);
+
+              const refreshedFriends = await getUserFriends(String(user.id));
+              setFriends(refreshedFriends.data);
+            } catch (err) {
+              console.error("Could not refresh data:", err);
+            }
+          }}
+        />
+      )}
 
       {loading ? (
         <Skeleton className="w-full h-32" />
@@ -338,6 +409,7 @@ export default function FriendsPage() {
                 setShowRequestDialog(true);
               }}
               onViewRequestsClick={() => handleViewRequests(friend)}
+              onUnfriendClick={() => handleUnfriend(user.id, friend.id)}
               onViewReceivedRequestsClick={() =>
                 handleViewReceivedRequests(friend)
               }
