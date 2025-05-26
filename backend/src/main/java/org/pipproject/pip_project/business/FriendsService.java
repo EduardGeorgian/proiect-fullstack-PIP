@@ -99,17 +99,32 @@ public class FriendsService {
     }
 
 
+    /**
+     * Returns a list of users who have sent a friend request to the specified user,
+     * where the friend requests are currently in a PENDING status.
+     *
+     * @param user the user who received the friend requests
+     * @return list of users who sent friend requests to the given user
+     */
     public List<User> getReceivedFriendRequests(User user) {
         List<Friends> receivedRequests = friendsRepository.findAllByFriendAndStatus(Optional.ofNullable(user), FriendRequestStatus.PENDING);
-        // Extragem doar utilizatorii care au trimis cererea
+        // Extract only the users who sent the friend request
         return receivedRequests.stream()
-                .map(Friends::getUser) // user = cel care a trimis cererea
+                .map(Friends::getUser) // user = the one who sent the request
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Accepts a friend request sent by the sender to the current user.
+     * Updates the status of the friend request to ACCEPTED.
+     *
+     * @param currentUser the user who received and is accepting the friend request
+     * @param sender the user who sent the friend request
+     * @throws IllegalStateException if the friend request is not found or is not in PENDING status
+     */
     public void acceptFriendRequest(User currentUser, User sender) {
         Optional<Friends> friendRequestOpt = friendsRepository
-                .findByUserAndFriend(sender, currentUser); // invers: sender → currentUser
+                .findByUserAndFriend(sender, currentUser); // sender → currentUser
 
         if (friendRequestOpt.isEmpty()) {
             throw new IllegalStateException("Friend request not found");
@@ -125,9 +140,17 @@ public class FriendsService {
         friendsRepository.save(friendRequest);
     }
 
+    /**
+     * Rejects a friend request sent by the sender to the current user.
+     * Updates the status of the friend request to REJECTED.
+     *
+     * @param currentUser the user who received and is rejecting the friend request
+     * @param sender the user who sent the friend request
+     * @throws IllegalStateException if the friend request is not found or is not in PENDING status
+     */
     public void rejectFriendRequest(User currentUser, User sender) {
         Optional<Friends> friendRequestOpt = friendsRepository
-                .findByUserAndFriend(sender, currentUser); // cererea e de la sender → currentUser
+                .findByUserAndFriend(sender, currentUser); // sender → currentUser
 
         if (friendRequestOpt.isEmpty()) {
             throw new IllegalStateException("Friend request not found");
