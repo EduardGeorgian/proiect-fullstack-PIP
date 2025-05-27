@@ -70,7 +70,9 @@ export default function CreateAccountDialog({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="outline">Create Account</Button>
+        <Button className="cursor-pointer" variant="outline">
+          Create Account
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -98,11 +100,13 @@ export default function CreateAccountDialog({
           />
         </div>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel className="cursor-pointer">
+            Cancel
+          </AlertDialogCancel>
           <AlertDialogAction
             onClick={handleCreate}
             disabled={loading}
-            className="bg-green-500 hover:bg-green-600 text-white"
+            className="bg-green-500 hover:bg-green-600 text-white cursor-pointer"
           >
             {loading ? "Creating..." : "Create"}
           </AlertDialogAction>

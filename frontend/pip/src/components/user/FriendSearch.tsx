@@ -125,7 +125,7 @@ export default function FriendSearch({
               </div>
               <Button
                 size="sm"
-                className="bg-blue-600 hover:bg-blue-700 text-white"
+                className="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
                 onClick={() => handleAddFriend(user.id)}
               >
                 Add Friend
@@ -134,7 +134,11 @@ export default function FriendSearch({
           ))}
         </ul>
         <div className="text-right mt-4">
-          <Button variant="ghost" onClick={handleClose}>
+          <Button
+            variant="ghost"
+            onClick={handleClose}
+            className="cursor-pointer"
+          >
             Close
           </Button>
         </div>

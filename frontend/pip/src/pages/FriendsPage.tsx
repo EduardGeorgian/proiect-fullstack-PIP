@@ -367,9 +367,9 @@ export default function FriendsPage() {
       <div className="my-4 flex items-center gap-2">
         <button
           onClick={() => setShowFriendRequests(true)}
-          className="flex items-center gap-2 text-blue-600 hover:underline"
+          className="flex items-center gap-2 text-blue-600 hover:underline cursor-pointer"
         >
-          <Bell className="w-5 h-5" />
+          <Bell className="w-5 h-5 cursor-pointer" />
           You have {pendingFriendRequests} friend request(s)
         </button>
       </div>
