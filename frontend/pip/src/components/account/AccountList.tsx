@@ -40,7 +40,7 @@ export default function AccountList({
             <div className="flex items-end justify-between">
               <div className="flex flex-col gap-10">
                 <Button
-                  className="bg-green-600 hover:bg-green-700 text-white"
+                  className="bg-green-600 hover:bg-green-700 text-white cursor-pointer"
                   onClick={() => onDeposit(account.id)}
                 >
                   Deposit
@@ -48,7 +48,7 @@ export default function AccountList({
                 <Button
                   variant="destructive"
                   onClick={() => onDeleteAccount(account.id)}
-                  className="bg-red-600 hover:bg-red-700 text-white"
+                  className="bg-red-600 hover:bg-red-700 text-white cursor-pointer"
                 >
                   Delete
                 </Button>

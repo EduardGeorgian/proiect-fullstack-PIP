@@ -89,8 +89,12 @@ export default function SendMoneyDialog({
           ))}
         </select>
 
-        <div className="flex justify-end gap-2">
-          <Button variant="outline" onClick={onClose}>
+        <div className="flex justify-end gap-2 cursor-pointer">
+          <Button
+            variant="outline"
+            onClick={onClose}
+            className="cursor-pointer"
+          >
             Cancel
           </Button>
           <Button
